@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}{% load i18n %}
+{% block content %}
+<div class="py-10 text-center page-reveal">
+    <h2 class="text-4xl font-black text-blue-900 dark:text-yellow-400 mb-12 italic uppercase">{% trans "SINFLAR PORTFOLIOSI" %}</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {% for grade in grades %}
+        <a href="{% url 'grade_detail' grade.id %}" class="glass p-10 shadow-xl hover:bg-blue-900 hover:text-white transition transform hover:scale-110 duration-300 block group">
+            <i class="fas fa-folder-open text-5xl mb-4 text-yellow-500 group-hover:text-white"></i>
+            <h3 class="text-2xl font-black">{{ grade.name }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

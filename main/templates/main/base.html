@@ -1,0 +1,387 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<!-- 
+    LOYIHA: OLTIARIQ IXTISOSLASHTIRILGAN MAKTABI PORTALI
+    DASTURCHI: ABDURAHMON MAXSUTALIYEV
+    YIL: 2026
+-->
+<html lang="{{ LANGUAGE_CODE }}" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>{% trans "Oltiariq Ixtisoslashtirilgan Maktabi" %}</title>
+
+    <!-- Kutubxonalar -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        premium: { blue: '#1e3a8a', gold: '#fbbf24', dark: '#0f172a' }
+                    }
+                }
+            }
+        }
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('mode-icon');
+            icon.classList.add('animate__animated', 'animate__rotateIn');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            setTimeout(() => icon.classList.remove('animate__animated', 'animate__rotateIn'), 500);
+        }
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        let menuAnimating = false;
+
+        function toggleMoreMenu() {
+            if (menuAnimating) return;
+            menuAnimating = true;
+            const menu = document.getElementById('more-menu');
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    const input = document.getElementById('more-search-input');
+                    if (input) input.focus();
+                }, 400);
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }
+            setTimeout(() => { menuAnimating = false; }, 400);
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.6s ease;
+        }
+
+        .page-reveal-effect {
+            animation: customFadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes customFadeInUp {
+            from { opacity: 0; transform: translateY(40px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        .premium-glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .dark .premium-glass-header {
+            background: rgba(15, 23, 42, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Nav-link dizayni zichlashtirildi */
+        .nav-link-underline {
+            position: relative;
+            font-weight: 800;
+            font-size: 13px; /* Kichraytirildi */
+            letter-spacing: 0.02em;
+            transition: all 0.4s ease;
+        }
+
+        .nav-link-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -8px;
+            left: 0;
+            background: #1e3a8a;
+            transition: width 0.4s ease;
+            border-radius: 50px;
+        }
+
+        .dark .nav-link-underline::after { background: #fbbf24; }
+        .nav-link-underline:hover::after { width: 100%; }
+        .active-page-line::after { width: 100% !important; }
+
+        .lang-selector-custom {
+            background: rgba(243, 244, 246, 1);
+            border: 1px solid rgba(209, 213, 219, 1);
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 10px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .dark .lang-selector-custom { background: #1e293b; color: white; border-color: #334155; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 20px; }
+        .dark ::-webkit-scrollbar-thumb { background: #fbbf24; }
+
+        /* Background Paths — oqayotgan SVG chiziqlar animatsiyasi */
+        .bg-path-line {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation-name: bgPathFloat;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes bgPathFloat {
+            from { transform: translateY(0); }
+            to { transform: translateY(var(--float-amp, -12px)); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-[#080c1a] text-slate-900 dark:text-slate-100 overflow-x-hidden">
+
+    <!-- HEADER (SIZGA MOSLAB TARTIBLANGAN) -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-4 md:p-6">
+        <div class="max-w-[1550px] mx-auto premium-glass-header shadow-2xl px-3 py-3 sm:px-6 sm:py-4 flex justify-between items-center rounded-[20px] sm:rounded-[30px] flex-wrap gap-3 md:flex-nowrap">
+            
+            <!-- CHAPDA: Logo -->
+            <div class="flex items-center space-x-4 shrink-0">
+                <a href="{% url 'home' %}" class="group block">
+                    <img src="https://ariza.piima.uz/_static/logo-icon-new-blue.svg" class="w-12 h-12 object-contain dark:brightness-200 transform group-hover:rotate-12 transition duration-500">
+                </a>
+                <div class="flex flex-col leading-none">
+                    <a href="{% url 'home' %}" class="text-xl font-black text-blue-900 dark:text-white tracking-tighter uppercase italic">Oltiariq IM</a>
+                </div>
+            </div>
+
+            <!-- O'RTADA: Menyu (Zichlashtirilgan masofa) -->
+            <nav class="hidden xl:flex space-x-6 uppercase font-bold shrink-0">
+                <a href="{% url 'home' %}" class="nav-link-underline flex items-center hover:text-blue-900 dark:hover:text-yellow-400 {% if request.resolver_match.url_name == 'home' %}active-page-line text-blue-950 dark:text-yellow-400{% endif %}">
+                    <i class="fas fa-home mr-2 opacity-50"></i> {% trans "Bosh sahifa" %}
+                </a>
+                <a href="{% url 'graduates' %}" class="nav-link-underline flex items-center hover:text-blue-900 dark:hover:text-yellow-400 {% if request.resolver_match.url_name == 'graduates' %}active-page-line text-blue-950 dark:text-yellow-400{% endif %}">
+                    <i class="fas fa-graduation-cap mr-2 opacity-50"></i> {% trans "Bitiruvchilar" %}
+                </a>
+                <a href="{% url 'portfolio' %}" class="nav-link-underline flex items-center hover:text-blue-900 dark:hover:text-yellow-400 {% if 'portfolio' in request.path %}active-page-line text-blue-950 dark:text-yellow-400{% endif %}">
+                    <i class="fas fa-folder-open mr-2 opacity-50"></i> {% trans "Portfolio" %}
+                </a>
+                <a href="{% url 'gallery_list' %}" class="nav-link-underline flex items-center hover:text-blue-900 dark:hover:text-yellow-400 {% if 'gallery_list' in request.path %}active-page-line text-blue-950 dark:text-yellow-400{% endif %}">
+                    <i class="fas fa-images mr-2 opacity-50"></i> {% trans "Galereya" %}
+                </a>
+                <a href="{% url 'contact' %}" class="nav-link-underline flex items-center hover:text-blue-900 dark:hover:text-yellow-400 {% if request.resolver_match.url_name == 'contact' %}active-page-line text-blue-950 dark:text-yellow-400{% endif %}">
+                    <i class="fas fa-phone mr-2 opacity-50"></i> {% trans "Aloqa" %}
+                </a>
+            </nav>
+
+            <!-- O'NGDA: Controls -->
+            <div class="flex items-center space-x-3 shrink-0">
+                <!-- base.html ichidagi qidiruv formasi -->
+                <form id="header-search-form" action="{% url 'search' %}" method="GET" class="hidden xl:flex items-center bg-slate-100 dark:bg-slate-800 rounded-full px-5 py-2.5 border border-gray-200 dark:border-gray-800 shadow-inner group">
+                    <input type="text" name="q" id="header-search-input" value="{{ request.GET.q }}"
+                        placeholder="{% trans 'Qidiruv...' %}" 
+                        class="bg-transparent border-none outline-none text-sm w-32 focus:w-60 transition-all duration-700">
+                    <button type="submit" class="text-blue-950 dark:text-yellow-400">
+                        <i class="fas fa-magnifying-glass"></i>
+                    </button>
+                </form>
+
+                <script>
+                    // Live Search skripti
+                    function setupLiveSearch(inputId, formId) {
+                        const input = document.getElementById(inputId);
+                        const form = document.getElementById(formId);
+                        let timer;
+
+                        if (input && form) {
+                            input.addEventListener('input', () => {
+                                clearTimeout(timer);
+                                timer = setTimeout(() => {
+                                    // Agar matn bo'lsa yoki bo'shatilsa yuboradi
+                                    form.submit();
+                                }, 600); // 0.6 soniya kutadi
+                            });
+
+                            // Kursorni matn oxiriga qo'yish (fokus yo'qolmasligi uchun)
+                            if (input.value) {
+                                input.focus();
+                                const val = input.value;
+                                input.value = '';
+                                input.value = val;
+                            }
+                        }
+                    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setupLiveSearch('header-search-input', 'header-search-form');
+    });
+</script>
+
+                <!-- Til Almashtirish (Rasmli) -->
+                <div class="relative group/lang">
+                    <button type="button" class="flex items-center space-x-2 bg-white/10 dark:bg-slate-800 px-3 py-1.5 rounded-xl border border-white/20">
+                        {% get_current_language as CURRENT_LANG %}
+                        <img src="https://flagcdn.com/w40/{% if CURRENT_LANG == 'en' %}us{% else %}{{ CURRENT_LANG }}{% endif %}.png" class="w-5 h-3 object-cover rounded-sm">
+                        <span class="text-xs font-black uppercase text-blue-900 dark:text-white">{{ CURRENT_LANG }}</span>
+                    </button>
+                    <div class="absolute right-0 top-[100%] pt-2 hidden group-hover/lang:block animate__animated animate__fadeIn z-[80]">
+                        <div class="premium-glass-header shadow-2xl rounded-2xl p-2 space-y-1 w-32 overflow-hidden">
+                            <form action="/i18n/setlang/" method="post">{% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}">
+                                <button name="language" value="uz" type="submit" class="w-full flex items-center p-1 text-[11px] font-black uppercase hover:bg-blue-600 hover:text-white rounded-lg transition-all"><img src="https://flagcdn.com/w40/uz.png" class="w-5 h-4 mr-3"> UZ</button>
+                                <button name="language" value="ru" type="submit" class="w-full flex items-center p-1 text-[11px] font-black uppercase hover:bg-blue-600 hover:text-white rounded-lg transition-all"><img src="https://flagcdn.com/w40/ru.png" class="w-5 h-4 mr-3"> RU</button>
+                                <button name="language" value="en" type="submit" class="w-full flex items-center p-1 text-[11px] font-black uppercase hover:bg-blue-600 hover:text-white rounded-lg transition-all"><img src="https://flagcdn.com/w40/us.png" class="w-5 h-4 mr-3"> EN</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="dark-mode-btn" onclick="toggleDarkMode()" class="w-11 h-11 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 border dark:border-gray-700 shadow-inner hover:shadow-lg transition-all">
+                    <i id="mode-icon" class="fas fa-moon dark:hidden text-blue-950"></i>
+                    <i class="fas fa-sun hidden dark:inline text-yellow-400"></i>
+                </button>
+
+                <a href="{% url 'apply' %}" class="hidden sm:inline-flex items-center bg-blue-900 dark:bg-yellow-500 text-white dark:text-blue-950 px-3 sm:px-6 py-2.5 rounded-[15px] font-black text-[9px] sm:text-[10px] uppercase shadow-xl hover:scale-105 transition-all whitespace-nowrap">{% trans "Qabul" %}</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative container mx-auto mt-20 sm:mt-32 lg:mt-40 px-3 sm:px-4 min-h-screen page-reveal-effect">
+        <!-- BARCHA SAHIFALAR TEPASIDAGI FON (rasm + animatsion chiziqlar) -->
+        {% include 'main/partials/background_paths.html' %}
+        <div class="relative z-10">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- FOOTER (POWERED BY OLIB TASHLANDI) -->
+    <footer class="bg-white dark:bg-[#0f172a] border-t border-slate-200 dark:border-slate-800 py-14 md:py-20 mt-20 md:mt-40 pb-28 xl:pb-14 transition-all duration-700">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-12 md:space-y-0">
+            <div class="text-center md:text-left">
+                <img src="https://ariza.piima.uz/_static/logo-icon-new-blue.svg" class="w-16 h-16 mb-5 mx-auto md:mx-0 dark:brightness-200 drop-shadow-2xl">
+                <h3 class="text-2xl font-black text-blue-950 dark:text-white italic uppercase leading-none">Oltiariq IM</h3>
+                <p class="text-[10px] font-bold opacity-30 mt-3 tracking-widest uppercase">&copy; 2026 {% trans "Oltiariq Ixtisoslashtirilgan Maktabi" %}</p>
+            </div>
+
+            <div class="flex space-x-12 text-4xl">
+                <a href="https://telegram.me/OLTIARIQ_IM" target="_blank" class="text-blue-500 hover:scale-125 transition-transform"><i class="fab fa-telegram"></i></a>
+                <a href="https://telegram.me/Maslahatchi_A" target="_blank" class="text-blue-400 hover:scale-125 transition-transform"><i class="fas fa-user-shield"></i></a>
+                <a href="https://www.facebook.com/groups/oltiariq.im/" target="_blank" class="text-blue-800 hover:scale-125 transition-transform"><i class="fab fa-facebook"></i></a>
+                <a href="https://maps.app.goo.gl/ndqe72ULRNJUDC2m9" target="_blank" class="text-red-500 hover:scale-125 transition-transform"><i class="fas fa-map-marker-alt"></i></a>
+            </div>
+
+            <div class="text-center md:text-right border-t md:border-t-0 md:border-l-4 border-slate-100 dark:border-slate-800 pt-10 md:pt-0 md:pl-12">
+                <p class="text-[10px] uppercase font-black opacity-30 mb-3">{% trans "Site Creator" %}:</p>
+                <a href="https://telegram.me/abdurahmondasturchi" target="_blank" class="group">
+                    <h4 class="text-3xl font-black text-slate-900 dark:text-yellow-400 group-hover:text-blue-600 transition-colors tracking-tighter uppercase italic leading-none">Abdurahmon Maxsutaliyev</h4>
+                    <p class="text-[10px] font-bold text-slate-400 mt-2 uppercase">Full-Stack Python Developer</p>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBIL PASTKI NAVIGATSIYA (Bottom Navigation Bar) -->
+    <nav class="xl:hidden fixed bottom-0 left-0 right-0 z-[90] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_30px_rgba(0,0,0,0.08)] pb-[env(safe-area-inset-bottom)]" aria-label="Mobile navigation">
+        <div class="grid grid-cols-5 max-w-lg mx-auto">
+            <a href="{% url 'home' %}" class="relative flex flex-col items-center gap-1 py-2.5 {% if request.resolver_match.url_name == 'home' %}text-blue-900 dark:text-yellow-400{% else %}text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors{% endif %}">
+                <i class="fas fa-home text-xl"></i>
+                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Asosiy" %}</span>
+                {% if request.resolver_match.url_name == 'home' %}<span class="absolute -top-px w-8 h-0.5 bg-blue-900 dark:bg-yellow-400 rounded-full"></span>{% endif %}
+            </a>
+            <a href="{% url 'news_all' %}" class="relative flex flex-col items-center gap-1 py-2.5 {% if 'news' in request.path %}text-blue-900 dark:text-yellow-400{% else %}text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors{% endif %}">
+                <i class="fas fa-newspaper text-xl"></i>
+                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Yangiliklar" %}</span>
+                {% if 'news' in request.path %}<span class="absolute -top-px w-8 h-0.5 bg-blue-900 dark:bg-yellow-400 rounded-full"></span>{% endif %}
+            </a>
+            <a href="{% url 'graduates' %}" class="relative flex flex-col items-center gap-1 py-2.5 {% if request.resolver_match.url_name == 'graduates' %}text-blue-900 dark:text-yellow-400{% else %}text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors{% endif %}">
+                <i class="fas fa-graduation-cap text-xl"></i>
+                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Bitiruvchilar" %}</span>
+                {% if request.resolver_match.url_name == 'graduates' %}<span class="absolute -top-px w-8 h-0.5 bg-blue-900 dark:bg-yellow-400 rounded-full"></span>{% endif %}
+            </a>
+            <a href="{% url 'portfolio' %}" class="relative flex flex-col items-center gap-1 py-2.5 {% if 'portfolio' in request.path %}text-blue-900 dark:text-yellow-400{% else %}text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors{% endif %}">
+                <i class="fas fa-folder-open text-xl"></i>
+                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Portfolio" %}</span>
+                {% if 'portfolio' in request.path %}<span class="absolute -top-px w-8 h-0.5 bg-blue-900 dark:bg-yellow-400 rounded-full"></span>{% endif %}
+            </a>
+            <button type="button" onclick="toggleMoreMenu()" class="relative flex flex-col items-center gap-1 py-2.5 text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors">
+                <i class="fas fa-ellipsis text-xl"></i>
+                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Ko'proq" %}</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- KO'PROQ MENYU (Bottom Sheet) -->
+    <div id="more-menu" class="hidden fixed inset-0 z-[95]">
+        <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-sm" onclick="toggleMoreMenu()"></div>
+        <div class="absolute bottom-0 left-0 right-0 bg-white dark:bg-slate-900 rounded-t-[40px] border-t border-slate-200 dark:border-slate-800 shadow-2xl p-6 pb-[calc(1.75rem+env(safe-area-inset-bottom))] animate__animated animate__slideInUp">
+            <div class="w-12 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full mx-auto mb-6"></div>
+            <div class="flex items-center justify-between mb-6">
+                <span class="text-lg font-black uppercase italic tracking-tight text-slate-900 dark:text-white">{% trans "Ko'proq" %}</span>
+                <button type="button" onclick="toggleMoreMenu()" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:scale-110 transition-transform"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <form action="{% url 'search' %}" method="GET" class="col-span-2 flex items-center gap-3 p-3 rounded-3xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus-within:border-blue-900 dark:focus-within:border-yellow-400 transition-all">
+                    <i class="fas fa-magnifying-glass text-xl text-blue-900 dark:text-yellow-400 ml-1"></i>
+                    <input type="text" name="q" id="more-search-input" placeholder="{% trans 'Qidiruv...' %}" class="flex-1 bg-transparent outline-none text-sm font-bold text-slate-900 dark:text-white placeholder:text-slate-400">
+                    <button type="submit" class="shrink-0 bg-blue-900 dark:bg-yellow-400 text-white dark:text-blue-950 px-4 py-2 rounded-2xl text-xs font-black uppercase italic hover:scale-105 transition-transform">
+                        <i class="fas fa-arrow-right-long"></i>
+                    </button>
+                </form>
+                <a href="{% url 'home' %}#teachers-section" onclick="toggleMoreMenu()" class="flex items-center gap-4 p-4 rounded-3xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-900 dark:hover:border-yellow-400 hover:scale-[1.02] transition-all">
+                    <i class="fas fa-chalkboard-user text-xl text-blue-900 dark:text-yellow-400"></i>
+                    <span class="text-sm font-black uppercase italic text-slate-900 dark:text-white">{% trans "Ustozlar" %}</span>
+                </a>
+                <a href="{% url 'contact' %}" onclick="toggleMoreMenu()" class="flex items-center gap-4 p-4 rounded-3xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-900 dark:hover:border-yellow-400 hover:scale-[1.02] transition-all">
+                    <i class="fas fa-phone text-xl text-blue-900 dark:text-yellow-400"></i>
+                    <span class="text-sm font-black uppercase italic text-slate-900 dark:text-white">{% trans "Aloqa" %}</span>
+                </a>
+                <a href="{% url 'apply' %}" onclick="toggleMoreMenu()" class="flex items-center gap-4 p-4 rounded-3xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-900 dark:hover:border-yellow-400 hover:scale-[1.02] transition-all">
+                    <i class="fas fa-file-signature text-xl text-blue-900 dark:text-yellow-400"></i>
+                    <span class="text-sm font-black uppercase italic text-slate-900 dark:text-white">{% trans "Qabul" %}</span>
+                </a>
+                <a href="{% url 'ai_test_select' %}" onclick="toggleMoreMenu()" class="flex items-center gap-4 p-4 rounded-3xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-900 dark:hover:border-yellow-400 hover:scale-[1.02] transition-all">
+                    <i class="fas fa-microchip text-xl text-blue-900 dark:text-yellow-400"></i>
+                    <span class="text-sm font-black uppercase italic text-slate-900 dark:text-white">{% trans "Imtihon" %}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

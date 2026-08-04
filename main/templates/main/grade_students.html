@@ -1,0 +1,120 @@
+{% extends 'main/base.html' %}{% load i18n %}
+
+{% block content %}
+<div class="max-w-[1500px] mx-auto py-4 md:py-10 px-2 md:px-4 page-reveal-effect">
+    
+    <!-- 1. TEPADAGI BANNER (MOBILGA MOS) -->
+    <div class="bg-gradient-to-br from-blue-700 to-blue-500 rounded-[30px] md:rounded-[50px] p-6 md:p-16 mb-6 md:mb-10 text-white shadow-2xl relative overflow-hidden">
+        <div class="relative z-10 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div>
+                <h1 class="text-2xl md:text-5xl font-black italic tracking-tighter leading-tight">{{ grade.name }}-{% trans "Sinf" %}</h1>
+                <div class="flex items-center justify-center md:justify-start text-sm md:text-xl font-bold opacity-80 mt-2 tracking-widest">
+                    <i class="fas fa-calendar-days mr-2"></i> {{ grade.academic_year }}
+                </div>
+            </div>
+            <div class="mt-6 md:mt-0 bg-white/10 backdrop-blur-xl px-8 py-4 rounded-3xl border border-white/20">
+                <span class="block text-2xl md:text-4xl font-black">{{ total_count }}</span>
+                <span class="text-[10px] uppercase font-black opacity-60">{% trans "O'quvchilar" %}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. QIDIRUV VA TARTIBLASH (TELEFONDA HAM KO'RINDI) -->
+    <div class="glass-nav mb-8 p-4 md:p-6 rounded-[30px] shadow-xl border-2 border-white/40 dark:border-white/5">
+        <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center md:justify-between">
+            <!-- Qidiruv maydoni -->
+            <div class="w-full md:max-w-md">
+                <form id="grade-search-form" method="GET" class="relative group">
+                    <input type="hidden" name="sort" value="{{ current_sort }}">
+                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-blue-900 dark:text-yellow-400 opacity-50"></i>
+                    <input type="text" name="q" id="grade-search-input" value="{{ search_query }}" 
+                           placeholder="{% trans 'O‘quvchini qidirish' %}..." 
+                           class="w-full bg-white/50 dark:bg-slate-800/50 border-2 border-transparent focus:border-blue-500 rounded-2xl py-3 pl-14 pr-5 outline-none font-bold text-sm transition-all">
+                </form>
+            </div>
+            
+            <!-- Tartiblash tugmalari -->
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[10px] font-black uppercase opacity-40 mr-2 italic">{% trans "Saralash" %}:</span>
+                <a href="?sort=name&q={{ search_query }}" class="px-5 py-3 rounded-xl text-xs font-black uppercase {% if current_sort == 'name' %}bg-blue-900 text-white shadow-lg{% else %}bg-white/30 dark:bg-slate-700{% endif %}">{% trans "Alifbo" %}</a>
+                <a href="?sort=score&q={{ search_query }}" class="px-5 py-3 rounded-xl text-xs font-black uppercase {% if current_sort == 'score' %}bg-blue-900 text-white shadow-lg{% else %}bg-white/30 dark:bg-slate-700{% endif %}">{% trans "Ball" %}</a>
+                <a href="?sort=age&q={{ search_query }}" class="px-5 py-3 rounded-xl text-xs font-black uppercase {% if current_sort == 'age' %}bg-blue-900 text-white shadow-lg{% else %}bg-white/30 dark:bg-slate-700{% endif %}">{% trans "Yosh" %}</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ASOSIY QISM (JADVAL VA SIDEBAR) -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- O'QUVCHILAR JADVALI -->
+        <div class="lg:col-span-3 order-2 lg:order-1">
+            <div class="glass-nav dark:bg-slate-800/80 rounded-[40px] shadow-2xl overflow-hidden border border-white/30">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-50/50 dark:bg-slate-700/50 text-[10px] font-black uppercase text-slate-400">
+                            <tr>
+                                <th class="p-4 md:p-8">№</th>
+                                <th class="p-4 md:p-8">{% trans "O'quvchi" %}</th>
+                                <th class="p-8 hidden md:table-cell">{% trans "Sana" %}</th>
+                                <th class="p-4 md:p-8 text-right">{% trans "Ball" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+                            {% for s in students %}
+                            <tr class="hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition cursor-pointer" onclick="window.location='{% url 'student_detail' s.pk %}'">
+                                <td class="p-4 md:p-8 font-black text-slate-300">{{ forloop.counter }}</td>
+                                <td class="p-4 md:p-8">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="{{ s.photo.url }}" class="w-10 h-10 md:w-16 md:h-16 rounded-xl object-cover shadow-lg">
+                                        <div class="max-w-[200px] sm:max-w-none">
+                                            <div class="font-black text-xs md:text-xl text-slate-800 dark:text-white uppercase leading-tight break-words">{{ s.full_name }}</div>
+                                            <span class="text-[9px] text-slate-400">ID: {{ s.id_number }}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-8 hidden md:table-cell font-bold text-slate-500">{{ s.birth_date|date:"d.m.Y" }}</td>
+                                <td class="p-4 md:p-8 text-right">
+                                    <span class="bg-yellow-400 text-blue-950 px-3 py-1 md:px-5 md:py-2 rounded-lg font-black text-xs md:text-lg whitespace-nowrap">{{ s.admission_score|floatformat:"-1" }}</span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="lg:col-span-1 space-y-6 order-1 lg:order-2">
+            <!-- SINFBOSHI -->
+            {% for s in students %}{% if s.is_leader %}
+            <div class="bg-slate-900 p-8 rounded-[40px] shadow-2xl relative overflow-hidden">
+                <i class="fas fa-crown absolute -right-4 -bottom-4 text-8xl opacity-10 rotate-12 text-yellow-400"></i>
+                <img src="{{ s.photo.url }}" class="w-20 h-20 mx-auto rounded-2xl object-cover mb-4 ring-4 ring-white/10">
+                <h4 class="text-white text-center font-black text-lg uppercase leading-tight">{{ s.full_name }}</h4>
+                <p class="text-yellow-400 text-center text-[10px] font-black uppercase mt-2 italic">{% trans "Sinfboshi" %}</p>
+            </div>
+            {% endif %}{% endfor %}
+
+            <!-- SINF RAHBARI (YURAKCHA O'RNIGA IKONKA) -->
+            {% if grade.teacher %}
+            <div class="bg-red-600 p-8 rounded-[40px] shadow-2xl text-white transform hover:scale-105 transition cursor-pointer relative overflow-hidden group" onclick="window.location='{% url 'teacher_detail' grade.teacher.pk %}'">
+                <i class="fas fa-user-tie absolute -right-5 -bottom-5 text-7xl opacity-10 rotate-12"></i>
+                <img src="{{ grade.teacher.image.url }}" class="w-20 h-20 mx-auto rounded-2xl object-cover mb-4 ring-4 ring-white/20">
+                <h4 class="font-black text-base text-center uppercase leading-snug break-words">{{ grade.teacher.full_name }}</h4>
+                <p class="text-red-100 text-center text-[10px] font-black uppercase mt-2 italic opacity-80">{% trans "Sinf rahbari" %}</p>
+                <div class="mt-6 pt-4 border-t border-white/20 text-center text-[9px] font-black uppercase tracking-widest">
+                    {% trans "Ma'lumotlar" %} <i class="fas fa-arrow-right ml-2"></i>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    // Live Search yordamchisi (base.html dagi funksiyaga ulanadi)
+    document.addEventListener('DOMContentLoaded', () => {
+        setupLiveSearch('grade-search-input', 'grade-search-form');
+    });
+</script>
+{% endblock %}

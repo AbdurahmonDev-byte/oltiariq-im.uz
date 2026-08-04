@@ -1,0 +1,290 @@
+{% extends 'main/base.html' %}{% load i18n %}{% load static %}
+
+{% block content %}
+<div class="page-reveal-effect">
+    
+    <!-- HERO SECTION (TUGMALAR TIKLANDI) -->
+    <section id="home" class="min-h-[70vh] flex items-center justify-center text-center py-20 px-4">
+        <div class="glass-nav p-6 sm:p-12 md:p-24 shadow-2xl max-w-6xl border-2 border-white/50 dark:border-white/10 rounded-[40px] sm:rounded-[80px] relative overflow-hidden group">
+            <div class="relative z-10">
+                <p class="text-[11px] sm:text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-[0.2em] sm:tracking-[0.6em] mb-6 italic break-words px-2">
+                    {% trans "Abdurahmon Maxsutaliyev tomonidan yaratilgan portal" %}
+                </p>
+                <h1 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter italic leading-tight break-words px-2">
+                    {% trans "Oltiariq Ixtisoslashtirilgan Maktabi" %}
+                </h1>
+                <p class="text-base sm:text-xl md:text-3xl text-blue-800 dark:text-white font-extrabold italic opacity-90 mb-14 px-2 break-words">
+                    "{% trans "Bilim bilan marralar sari — Kelajak liderlari bizda ulg‘ayadi!" %}"
+                </p>
+                
+                <!-- AVVALGI ZO'R TUGMALAR QAYTARILDI -->
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-6 animate__animated animate__fadeInUp">
+                    <!-- AI IMTIHON TUGMASI (YANGI) -->
+                    <a href="{% url 'ai_test_select' %}" class="group/ai bg-yellow-400 text-blue-950 px-6 sm:px-10 py-4 rounded-[25px] font-black uppercase text-[11px] sm:text-sm shadow-xl hover:scale-110 transition-all duration-500 flex items-center justify-center whitespace-nowrap">
+                        <i class="fas fa-robot mr-2 sm:mr-3 text-lg sm:text-xl group-hover/ai:animate-bounce"></i> {% trans "AI Imtihon" %}
+                    </a>
+
+                    <!-- YANGILIKLAR TUGMASI -->
+                    <a href="#news-section" class="bg-white text-slate-950 px-6 sm:px-10 py-4 rounded-[25px] font-black uppercase text-[11px] sm:text-sm shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+                        <i class="fas fa-newspaper mr-2 sm:mr-3"></i> {% trans "Yangiliklar" %}
+                    </a>
+
+                    <!-- USTOZLAR TUGMASI -->
+                    <a href="#teachers-section" class="bg-blue-900 text-white px-6 sm:px-10 py-4 rounded-[25px] font-black uppercase text-[11px] sm:text-sm shadow-xl hover:scale-110 hover:bg-blue-700 transition-all duration-500 flex items-center justify-center whitespace-nowrap">
+                        <i class="fas fa-chalkboard-user mr-2 sm:mr-3"></i> {% trans "Ustozlar" %}
+                    </a>
+
+                    <!-- QABUL TUGMASI -->
+                    <a href="{% url 'apply' %}" class="bg-red-600 text-white px-6 sm:px-10 py-4 rounded-[25px] font-black uppercase text-[11px] sm:text-sm shadow-xl hover:scale-110 hover:bg-red-700 transition-all duration-500 flex items-center justify-center whitespace-nowrap">
+                        <i class="fas fa-paper-plane mr-2 sm:mr-3"></i> {% trans "Qabul-2026" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIREKTOR -->
+    {% if director %}
+    <section class="max-w-7xl mx-auto py-12 md:py-16 px-6">
+        <a href="{% url 'teacher_detail' director.pk %}" class="group block bg-gradient-to-r from-blue-900 to-blue-700 dark:from-slate-800 dark:to-slate-700 rounded-[40px] md:rounded-[60px] p-8 md:p-16 text-white relative overflow-hidden shadow-2xl border border-white/10 hover:scale-[1.01] transition-all duration-700">
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                <div class="shrink-0">
+                    <img src="{{ director.image.url }}" class="w-32 h-32 md:w-44 md:h-44 rounded-[30px] object-cover ring-4 ring-yellow-400/50 shadow-2xl group-hover:ring-yellow-400 transition-all">
+                </div>
+                <div class="text-center md:text-left">
+                    <span class="bg-yellow-400 text-blue-950 px-4 py-1.5 rounded-full font-black text-[10px] uppercase tracking-widest inline-block mb-4">{{ director.position }}</span>
+                    <h3 class="text-3xl md:text-5xl font-black italic uppercase tracking-tighter leading-tight">{{ director.full_name }}</h3>
+                    <p class="text-blue-200 dark:text-slate-300 text-lg md:text-xl font-bold italic mt-4 opacity-80">{{ director.subject }}</p>
+                    {% if director.bio %}
+                    <p class="text-white/70 text-base mt-6 max-w-3xl leading-relaxed">{{ director.bio|truncatewords:40 }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </a>
+    </section>
+    {% endif %}
+
+    <!-- 2. STATISTIKA (YOMG'IR ANIMATSIYASI) -->
+    <div id="stats-section" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 max-w-7xl mx-auto py-16 px-6 overflow-hidden">
+        {% for s in stats %}
+        <div class="scroll-item opacity-0 glass-nav p-6 md:p-12 rounded-[30px] md:rounded-[55px] text-center transform shadow-2xl border border-white/30 relative group" data-animation="animate__backInDown">
+            <div class="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-blue-900/5 dark:bg-yellow-400/5 rounded-2xl md:rounded-[22px] mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-500">
+                <img src="{{ s.icon_image.url }}" class="w-8 h-8 md:w-11 md:h-11 object-contain dark:invert">
+            </div>
+            <div class="text-4xl md:text-6xl font-black text-slate-950 dark:text-white mb-2 md:mb-3 tracking-tighter leading-none">{{ s.value }}</div>
+            <div class="text-[10px] md:text-[12px] font-black uppercase opacity-40 tracking-[0.1em] sm:tracking-[0.3em] italic break-words px-1">
+                {% get_current_language as LANG %}{% if LANG == 'en' %}{{ s.label_en }}{% elif LANG == 'ru' %}{{ s.label_ru }}{% else %}{{ s.label_uz }}{% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 3. GALEREYA HUDUDI -->
+    <!-- GALEREYA HUDUDI (RESPONSIVE VA TUZATILGAN) -->
+    <section id="gallery-section" class="max-w-7xl mx-auto py-16 md:py-32 px-4 md:px-6 overflow-hidden">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-12 md:mb-20 space-y-6 md:space-y-0">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl md:text-5xl font-black text-slate-950 dark:text-white uppercase italic tracking-tighter border-l-[10px] md:border-l-[15px] border-blue-900 dark:border-yellow-400 pl-4 md:pl-8 leading-none">
+                    {% trans "Maktab Galereyasi" %}
+                </h2>
+                <p class="text-slate-500 mt-4 text-sm md:text-lg font-medium italic">{% trans "Maktabimiz hayotidan foto-lavhalar" %}</p>
+            </div>
+
+            {% if gallery_images %}
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <a href="{% url 'gallery_list' %}" class="bg-yellow-400 text-blue-950 px-5 py-3 md:px-8 md:py-3.5 rounded-full font-black text-xs uppercase hover:scale-105 transition-all shadow-xl whitespace-nowrap">
+                    {% trans "Barcha rasmlar" %}
+                </a>
+                <button id="homeGalleryPrev" aria-label="{% trans 'Oldingi rasm' %}" class="w-11 h-11 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-blue-900 dark:bg-white text-white dark:text-slate-900 text-xl md:text-2xl shadow-lg hover:scale-110 active:scale-95 transition-transform disabled:opacity-40 disabled:cursor-not-allowed">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <span id="homeGalleryCounter" class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 font-black text-sm md:text-base italic whitespace-nowrap"></span>
+                <button id="homeGalleryNext" aria-label="{% trans 'Keyingi rasm' %}" class="w-11 h-11 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-blue-900 dark:bg-white text-white dark:text-slate-900 text-xl md:text-2xl shadow-lg hover:scale-110 active:scale-95 transition-transform disabled:opacity-40 disabled:cursor-not-allowed">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if gallery_images %}
+        <!-- ASOSIY RASM CAROUSELI -->
+        <div class="max-w-4xl mx-auto">
+            <div class="overflow-hidden rounded-xl sm:rounded-2xl shadow-lg bg-slate-100 dark:bg-slate-800">
+                <div id="homeGallerySlider" class="flex transition-transform duration-700 ease-in-out cursor-grab active:cursor-grabbing">
+                    {% for img in gallery_images %}
+                    <div class="w-full shrink-0 select-none">
+                        <img src="{{ img.image.url }}" alt="{{ img.caption|default:'' }}" class="w-full h-auto sm:aspect-video object-cover pointer-events-none">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="homeGalleryCaptionWrap" class="mt-4 sm:mt-6 p-4 sm:p-6 bg-white/70 dark:bg-slate-900/70 rounded-xl sm:rounded-2xl shadow-lg text-center">
+                <p id="homeGalleryCaption" class="text-xl sm:text-3xl font-black italic text-slate-950 dark:text-white break-words"></p>
+            </div>
+        </div>
+
+        <script>
+        (function () {
+            var slider = document.getElementById('homeGallerySlider');
+            var slides = slider.children;
+            var counter = document.getElementById('homeGalleryCounter');
+            var captionEl = document.getElementById('homeGalleryCaption');
+            var captionWrap = document.getElementById('homeGalleryCaptionWrap');
+            var prevBtn = document.getElementById('homeGalleryPrev');
+            var nextBtn = document.getElementById('homeGalleryNext');
+            var captions = Array.from(slides).map(function (s) {
+                return s.querySelector('img').alt || '';
+            });
+            var index = 0;
+            var total = slides.length;
+
+            if (total <= 1) { prevBtn.disabled = true; nextBtn.disabled = true; }
+            if (captions.every(function (c) { return !c; })) { captionWrap.style.display = 'none'; }
+
+            function goTo(i) {
+                index = (i + total) % total;
+                slider.style.transform = 'translateX(-' + index * 100 + '%)';
+                counter.textContent = (index + 1) + ' / ' + total;
+                captionEl.textContent = captions[index];
+            }
+
+            prevBtn.addEventListener('click', function () { goTo(index - 1); });
+            nextBtn.addEventListener('click', function () { goTo(index + 1); });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowLeft') goTo(index - 1);
+                if (e.key === 'ArrowRight') goTo(index + 1);
+            });
+
+            var startX = null;
+            slider.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+            slider.addEventListener('touchend', function (e) {
+                if (startX === null) return;
+                var dx = e.changedTouches[0].clientX - startX;
+                if (Math.abs(dx) > 40) goTo(dx < 0 ? index + 1 : index - 1);
+                startX = null;
+            }, { passive: true });
+
+            goTo(0);
+        })();
+        </script>
+        {% endif %}
+    </section>
+
+    <!-- 4. YANGILIKLAR HUDUDI -->
+    <section id="news-section" class="max-w-7xl mx-auto py-16 md:py-32 px-6 overflow-hidden">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-12 md:mb-24 space-y-6">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl md:text-5xl font-black text-slate-950 dark:text-white uppercase italic tracking-tighter border-l-[10px] md:border-l-[15px] border-blue-900 dark:border-yellow-400 pl-4 md:pl-8 leading-none">
+                    {% trans "So'nggi Yangiliklar" %}
+                </h2>
+                <p class="text-slate-500 mt-4 md:mt-6 text-sm md:text-lg font-medium italic">{% trans "Maktabimiz hayotidagi eng muhim voqealar" %}</p>
+            </div>
+            <a href="{% url 'news_all' %}" class="bg-blue-900/10 dark:bg-white/5 text-blue-900 dark:text-yellow-400 px-8 md:px-10 py-3 md:py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-blue-900 hover:text-white transition-all duration-500">
+                {% trans "Barcha yangiliklar" %}
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-14">
+            {% for item in news %}
+            <div class="scroll-item opacity-0 glass-nav overflow-hidden rounded-[30px] md:rounded-[60px] group transition-all duration-1000 hover:shadow-2xl border border-white/40" data-animation="animate__backInDown">
+                <div class="h-56 md:h-[400px] overflow-hidden relative">
+                    <img src="{{ item.main_image.url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-[2s]">
+                    <div class="absolute top-6 left-6 md:top-8 md:left-8 bg-white/90 backdrop-blur-md text-blue-950 text-[10px] md:text-[11px] font-black px-5 md:px-6 py-2 md:py-2.5 rounded-2xl uppercase italic shadow-2xl">
+                        {{ item.created_at|date:"d F, Y" }}
+                    </div>
+                </div>
+                <div class="p-6 md:p-12 text-left">
+                    <h3 class="text-xl md:text-3xl font-black text-slate-950 dark:text-white mb-4 md:mb-6 leading-tight group-hover:text-blue-700 transition">
+                        {{ item.title }}
+                    </h3>
+                    <a href="{% url 'news_detail' item.pk %}" class="inline-flex items-center text-[12px] font-black text-blue-900 dark:text-yellow-500 uppercase tracking-[0.2em] group/read transition-all">
+                        <span class="border-b-2 border-transparent group-hover/read:border-current pb-1">{% trans "Batafsil o'qish" %}</span>
+                        <i class="fas fa-arrow-right-long ml-4 group-hover/read:translate-x-4 transition-transform duration-500"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 5. USTOZLAR HUDUDI (Yomg'ir animatsiyasi bilan) -->
+    <section id="teachers-section" class="max-w-7xl mx-auto py-16 md:py-32 px-4 sm:px-12 mb-20 md:mb-40 overflow-hidden">
+        <h2 class="text-3xl md:text-5xl font-black text-slate-950 dark:text-white mb-12 md:mb-24 text-center uppercase italic tracking-tighter">
+            {% trans "Bizning Malakali Ustozlarimiz" %}
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-14">
+            {% for t in teachers %}
+            <a href="{% url 'teacher_detail' t.pk %}" class="scroll-item opacity-0 bg-white/70 dark:bg-slate-700/60 p-4 md:p-8 rounded-[30px] md:rounded-[60px] text-center shadow-2xl transform transition-all duration-700 border border-white/30 group block" data-animation="animate__backInDown">
+                <div class="w-24 h-24 md:w-40 md:h-40 mx-auto mb-4 md:mb-8 relative">
+                    <img src="{{ t.image.url }}" class="w-full h-full rounded-[50px] object-cover ring-[12px] ring-white dark:ring-slate-800 shadow-2xl group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute -bottom-3 -right-3 md:-bottom-6 md:-right-6 bg-yellow-400 w-9 h-9 md:w-14 md:h-14 rounded-2xl md:rounded-3xl flex items-center justify-center shadow-2xl rotate-12 group-hover:rotate-[30deg] transition-all">
+                        <i class="fas fa-award text-blue-950 text-base md:text-2xl"></i>
+                    </div>
+                </div>
+                <h4 class="font-black text-base md:text-xl text-slate-950 dark:text-white mb-2 md:mb-3 tracking-tighter leading-snug break-words">{{ t.full_name }}</h4>
+                <p class="text-blue-700 dark:text-yellow-400 font-extrabold text-sm uppercase tracking-widest italic opacity-70">{{ t.subject }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 2. AI PROMO (Siz skrinshotda ko'rsatgan cramped joy) -->
+    <section class="max-w-7xl mx-auto py-16 md:py-24 mb-20 md:mb-40 bg-slate-900 dark:bg-slate-800 rounded-[40px] md:rounded-[80px] p-8 md:p-24 text-center text-white relative overflow-hidden shadow-2xl border-4 border-yellow-400/10">
+        <div class="relative z-10">
+            <span class="bg-yellow-400 text-blue-900 px-4 py-2 rounded-full font-black text-[9px] md:text-xs uppercase tracking-widest mb-6 inline-block">NEW AI TECHNOLOGY</span>
+            <h2 class="text-3xl md:text-6xl font-black italic mb-6 tracking-tighter leading-tight uppercase">{% trans "Imtihonga tayyormisiz?" %}</h2>
+            <p class="text-slate-400 mb-10 max-w-3xl mx-auto text-base md:text-xl italic leading-relaxed opacity-80">
+                {% trans "Bizning sun'iy intellekt tizimimiz PIIMA standartlari asosida har safar yangi testlar tuzib beradi. O'zingizni sinab ko'ring!" %}
+            </p>
+            <a href="{% url 'ai_test_select' %}" class="bg-white text-blue-950 px-10 py-4 md:px-20 md:py-7 rounded-2xl md:rounded-[40px] font-black text-sm md:text-2xl uppercase hover:bg-yellow-400 transition-all shadow-2xl inline-block">
+                {% trans "Testni boshlash" %}
+            </a>
+        </div>
+    </section>
+
+    <!-- 3. JOIN US (Footerdagi ulkan sarlavha tuzatildi) -->
+    <section id="join-us" class="max-w-7xl mx-auto mb-20 md:mb-40 bg-gradient-to-br from-blue-900 to-indigo-950 rounded-[40px] md:rounded-[80px] p-8 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
+        <div class="relative z-10">
+            <h2 class="text-3xl md:text-7xl font-black italic mb-6 tracking-tighter leading-tight uppercase break-words">
+                {% trans "Siz ham bizning safimizga qo'shiling!" %}
+            </h2>
+            <p class="text-blue-100 mb-10 max-w-4xl mx-auto text-base md:text-2xl font-medium italic opacity-90 leading-relaxed">
+                {% trans "Oltiariq Ixtisoslashtirilgan maktabida 2026-yilgi o'quv yili uchun qabul davom etmoqda." %}
+            </p>
+            <a href="{% url 'apply' %}" class="bg-red-600 text-white px-10 py-5 md:px-20 md:py-8 rounded-2xl md:rounded-[40px] font-black text-sm md:text-2xl uppercase hover:bg-white hover:text-red-600 transition-all shadow-2xl inline-block w-full md:w-auto">
+                {% trans "Hujjat Topshirish" %} <i class="fas fa-chevron-right ml-3"></i>
+            </a>
+        </div>
+    </section>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sezgirlikni 0.1 ga tushirdik (10% ko'rinsa ham animatsiya ishlaydi)
+        const observerOptions = { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px' // Bo'limga 50px qolganda yuklashni boshlaydi
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const items = entry.target.querySelectorAll('.scroll-item');
+                    items.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.remove('opacity-0');
+                            item.classList.add('animate__animated', item.dataset.animation);
+                        }, index * 150); // Kechikishni biroz kamaytirdik (150ms)
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const sections = ['#stats-section', '#news-section', '#gallery-section', '#teachers-section'];
+        sections.forEach(id => {
+            const el = document.querySelector(id);
+            if (el) observer.observe(el);
+        });
+    });
+</script>
+{% endblock %}

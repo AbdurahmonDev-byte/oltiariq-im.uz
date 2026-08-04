@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% load i18n %} 
+{% block content %}
+<div class="py-10 px-4 sm:px-6">
+    <h2 class="text-3xl font-black text-blue-900 dark:text-yellow-400 mb-10 text-center uppercase italic tracking-tighter">
+        {% trans "Maktabimiz bitiruvchilari" %}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for graduate in graduates %}
+        <div class="glass overflow-hidden shadow-lg group hover:shadow-2xl transition duration-500 animate__animated animate__fadeInUp">
+            <div class="h-64 relative overflow-hidden">
+                <img src="{{ graduate.image.url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                <div class="absolute top-4 right-4 bg-yellow-400 text-blue-900 px-3 py-1 rounded-full font-black text-[10px]">
+                    {{ graduate.year }}-YIL
+                </div>
+            </div>
+            <div class="p-6">
+                <h3 class="text-xl font-black text-gray-800 leading-none mb-2">{{ graduate.full_name }}</h3>
+                <div class="border-l-4 border-blue-900 pl-3 mt-4">
+                    <p class="text-xs text-blue-800 font-black uppercase tracking-widest mb-1 italic">Hozirda:</p>
+                    <p class="text-sm text-gray-600 font-semibold">{{ graduate.achievement }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center py-20 text-gray-400 italic">{% trans "Hozircha bitiruvchilar ma'lumotlari yuklanmagan." %}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

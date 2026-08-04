@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /rosetta/
+
+Sitemap: https://oltiariq-im.uz/sitemap.xml

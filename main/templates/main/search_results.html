@@ -1,0 +1,103 @@
+{% extends 'main/base.html' %}{% load i18n %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto py-16 px-6 page-reveal-effect">
+    
+    <!-- 1. SARLAVHA -->
+    <div class="mb-20 text-center md:text-left">
+        <h2 class="text-2xl md:text-4xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter border-l-[10px] md:border-l-[15px] border-blue-900 dark:border-yellow-400 pl-4 md:pl-8 leading-none">
+            {% trans "Qidiruv natijalari" %}: <span class="text-blue-600 dark:text-yellow-400">"{{ query }}"</span>
+        </h2>
+        <div class="h-1.5 w-32 bg-slate-200 dark:bg-slate-800 mt-8 rounded-full"></div>
+
+        <!-- YANGI QIDIRUV FORMASI -->
+        <form action="{% url 'search' %}" method="GET" class="mt-10 max-w-2xl flex items-center gap-3 p-3 rounded-[30px] bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 shadow-xl focus-within:border-blue-900 dark:focus-within:border-yellow-400 transition-all">
+            <i class="fas fa-magnifying-glass text-2xl text-blue-900 dark:text-yellow-400 ml-3"></i>
+            <input type="text" name="q" value="{{ query }}" placeholder="{% trans 'Qidiruv...' %}" class="flex-1 bg-transparent outline-none text-base font-bold text-slate-900 dark:text-white placeholder:text-slate-400" autofocus>
+            <button type="submit" class="shrink-0 bg-blue-900 dark:bg-yellow-400 text-white dark:text-blue-950 px-6 py-3 rounded-[20px] text-sm font-black uppercase italic hover:scale-105 transition-transform">
+                {% trans "Qidiruv" %}
+            </button>
+        </form>
+    </div>
+
+    <!-- 2. NATIJALARNI TEKSHIRISH -->
+    {% if news or teachers or students %}
+        
+        <!-- TOPILGAN USTOZLAR (Ayniqsa "Dildora" uchun) -->
+        {% if teachers %}
+        <div class="mb-20 animate__animated animate__fadeInUp">
+            <h3 class="text-2xl font-black text-blue-900 dark:text-yellow-400 uppercase italic mb-10 tracking-widest flex items-center">
+                <i class="fas fa-chalkboard-teacher mr-4"></i> {% trans "Topilgan Ustozlar" %}
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12">
+                {% for t in teachers %}
+                <a href="{% url 'teacher_detail' t.pk %}" class="bg-white/60 dark:bg-slate-800/60 p-8 rounded-[40px] text-center shadow-xl hover:scale-105 transition-all border border-white/20 group">
+                    <img src="{{ t.image.url }}" class="w-32 h-32 mx-auto rounded-full object-cover mb-4 ring-4 ring-blue-900/10">
+                    <h4 class="font-black text-xl text-slate-900 dark:text-white break-words leading-snug">{{ t.full_name }}</h4>
+                    <p class="text-blue-600 dark:text-yellow-400 font-bold text-xs uppercase">{{ t.subject }}</p>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- TOPILGAN O'QUVCHILAR -->
+        {% if students %}
+        <div class="mb-20 animate__animated animate__fadeInUp">
+            <h3 class="text-2xl font-black text-blue-900 dark:text-yellow-400 uppercase italic mb-10 tracking-widest flex items-center">
+                <i class="fas fa-user-graduate mr-4"></i> {% trans "Topilgan O'quvchilar" %}
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                {% for s in students %}
+                <a href="{% url 'student_detail' s.pk %}" class="glass-nav p-6 rounded-[30px] flex items-center space-x-6 hover:shadow-2xl transition">
+                    <img src="{{ s.photo.url }}" class="w-16 h-16 rounded-2xl object-cover shadow-lg">
+                    <div>
+                        <h4 class="font-black text-slate-900 dark:text-white uppercase leading-none">{{ s.full_name }}</h4>
+                        <p class="text-[10px] text-slate-400 mt-2">ID: {{ s.id_number }} | {{ s.grade.name }} {% trans "Sinf" %}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- TOPILGAN YANGILIKLAR -->
+        {% if news %}
+        <div class="mb-20 animate__animated animate__fadeInUp">
+            <h3 class="text-2xl font-black text-blue-900 dark:text-yellow-400 uppercase italic mb-10 tracking-widest flex items-center">
+                <i class="fas fa-newspaper mr-4"></i> {% trans "Topilgan Yangiliklar" %}
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {% for n in news %}
+                <a href="{% url 'news_detail' n.pk %}" class="glass-nav rounded-[40px] overflow-hidden group flex flex-col md:flex-row shadow-xl">
+                    <div class="md:w-1/3 h-48 overflow-hidden">
+                        <img src="{{ n.main_image.url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                    </div>
+                    <div class="p-8 md:w-2/3">
+                        <h4 class="font-black text-xl text-slate-900 dark:text-white mb-2">{{ n.title }}</h4>
+                        <p class="text-sm opacity-60 italic">{{ n.content|truncatewords:15 }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% else %}
+        <!-- HECH NARSA TOPILMASA -->
+        <div class="text-center py-40 glass-nav rounded-[80px] opacity-40 animate__animated animate__pulse">
+            <i class="fas fa-search-minus text-[10rem] mb-12 block"></i>
+            <h3 class="text-2xl sm:text-3xl font-black uppercase tracking-[0.1em] sm:tracking-[0.3em] break-words px-4">{% trans "Hech narsa topilmadi" %}</h3>
+            <p class="mt-6 text-xl italic">{% trans "Iltimos, boshqa so'z bilan qidirib ko'ring." %}</p>
+        </div>
+    {% endif %}
+
+    <!-- ORTGA QAYTISH -->
+    <div class="text-center mt-20">
+        <a href="{% url 'home' %}" class="bg-slate-950 dark:bg-white text-white dark:text-slate-900 px-16 py-6 rounded-[35px] font-black uppercase text-sm shadow-2xl hover:scale-110 transition-all italic">
+            <i class="fas fa-long-arrow-left mr-4"></i> {% trans "Bosh sahifaga qaytish" %}
+        </a>
+    </div>
+
+</div>
+{% endblock %}

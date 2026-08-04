@@ -1,0 +1,101 @@
+{% extends 'main/base.html' %}{% load i18n %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto py-12 md:py-20 px-6 page-reveal-effect">
+
+    <!-- SARLAVHA + TUGMALAR: mobil da ustma-ust, desktop da bir qatorda (justify-between) -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 mb-8 md:mb-16">
+        <h2 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white uppercase italic border-l-[10px] md:border-l-[15px] border-blue-900 dark:border-yellow-400 pl-4 md:pl-8 leading-none tracking-tighter">
+            {% trans "Maktab Galereyasi" %}
+        </h2>
+
+        {% if images %}
+        <div class="flex items-center justify-center gap-3">
+            <button id="galleryPrev" aria-label="{% trans 'Oldingi rasm' %}" class="w-11 h-11 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-blue-900 dark:bg-white text-white dark:text-slate-900 text-xl sm:text-2xl shadow-lg hover:scale-110 active:scale-95 transition-transform disabled:opacity-40 disabled:cursor-not-allowed">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <span id="galleryCounter" class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 font-black text-sm sm:text-base italic whitespace-nowrap"></span>
+            <button id="galleryNext" aria-label="{% trans 'Keyingi rasm' %}" class="w-11 h-11 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-blue-900 dark:bg-white text-white dark:text-slate-900 text-xl sm:text-2xl shadow-lg hover:scale-110 active:scale-95 transition-transform disabled:opacity-40 disabled:cursor-not-allowed">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if images %}
+    <!-- ASOSIY RASM BLOKI: mobil da to'liq kenglik, desktop da max-w-4xl -->
+    <div class="max-w-4xl mx-auto">
+        <div class="overflow-hidden rounded-xl sm:rounded-2xl shadow-lg bg-slate-100 dark:bg-slate-800">
+            <div id="gallerySlider" class="flex transition-transform duration-700 ease-in-out cursor-grab active:cursor-grabbing">
+                {% for img in images %}
+                <div class="w-full shrink-0 select-none">
+                    <img src="{{ img.image.url }}" alt="{{ img.caption|default:'' }}" class="w-full h-auto sm:aspect-video object-cover pointer-events-none">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- TAVSIF: p-4 sm:p-6, text-xl sm:text-3xl -->
+        <div id="galleryCaptionWrap" class="mt-4 sm:mt-6 p-4 sm:p-6 bg-white/70 dark:bg-slate-900/70 rounded-xl sm:rounded-2xl shadow-lg text-center">
+            <p id="galleryCaption" class="text-xl sm:text-3xl font-black italic text-slate-950 dark:text-white break-words"></p>
+        </div>
+    </div>
+    {% else %}
+    <!-- Rasm yo'q holati -->
+    <div class="glass-nav shadow-2xl rounded-[30px] md:rounded-[60px] border border-white/20 p-10 md:p-20 text-center">
+        <i class="fas fa-images text-4xl md:text-6xl text-slate-300 dark:text-slate-600 mb-6 md:mb-8"></i>
+        <p class="text-slate-400 dark:text-slate-500 text-lg md:text-2xl font-bold italic">
+            {% trans "Hozircha rasmlar mavjud emas" %}
+        </p>
+    </div>
+    {% endif %}
+</div>
+
+{% if images %}
+<script>
+(function () {
+    var slider = document.getElementById('gallerySlider');
+    var slides = slider.children;
+    var counter = document.getElementById('galleryCounter');
+    var captionEl = document.getElementById('galleryCaption');
+    var captionWrap = document.getElementById('galleryCaptionWrap');
+    var prevBtn = document.getElementById('galleryPrev');
+    var nextBtn = document.getElementById('galleryNext');
+    var captions = Array.from(slides).map(function (s) {
+        return s.querySelector('img').alt || '';
+    });
+    var index = 0;
+    var total = slides.length;
+
+    if (total <= 1) { prevBtn.disabled = true; nextBtn.disabled = true; }
+    if (captions.every(function (c) { return !c; })) { captionWrap.style.display = 'none'; }
+
+    function goTo(i) {
+        index = (i + total) % total;
+        slider.style.transform = 'translateX(-' + index * 100 + '%)';
+        counter.textContent = (index + 1) + ' / ' + total;
+        captionEl.textContent = captions[index];
+    }
+
+    prevBtn.addEventListener('click', function () { goTo(index - 1); });
+    nextBtn.addEventListener('click', function () { goTo(index + 1); });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') goTo(index - 1);
+        if (e.key === 'ArrowRight') goTo(index + 1);
+    });
+
+    var startX = null;
+    slider.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    slider.addEventListener('touchend', function (e) {
+        if (startX === null) return;
+        var dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) goTo(dx < 0 ? index + 1 : index - 1);
+        startX = null;
+    }, { passive: true });
+
+    goTo(0);
+})();
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="max-w-7xl mx-auto py-10 md:py-16 px-4 sm:px-6 page-reveal-effect">
+    <h2 class="text-3xl md:text-5xl font-black text-slate-950 dark:text-white mb-8 md:mb-16 text-center uppercase italic tracking-tighter">
+        {% trans "Maktabimiz Ustozlari" %}
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {% for teacher in teachers %}
+        <div class="bg-white dark:bg-slate-800 rounded-[30px] md:rounded-[40px] shadow-2xl overflow-hidden border border-white/20 group hover:scale-[1.02] transition-all duration-500">
+            <div class="h-52 md:h-72 overflow-hidden">
+                <img src="{{ teacher.image.url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+            </div>
+            <div class="p-4 md:p-8 text-center">
+                <h3 class="text-lg md:text-xl font-black text-slate-900 dark:text-white uppercase leading-snug break-words">{{ teacher.full_name }}</h3>
+                <p class="text-blue-700 dark:text-yellow-400 font-extrabold text-xs md:text-sm mt-1 md:mt-2 italic">{{ teacher.subject }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
