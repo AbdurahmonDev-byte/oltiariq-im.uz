@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-31 09:22+0500\n"
+"POT-Creation-Date: 2026-08-04 13:38+0500\n"
 "PO-Revision-Date: 2026-07-22 16:10+0500\n"
 "Last-Translator: Abdurahmon Maxsutaliyev\n"
 "Language-Team: Russian\n"
@@ -10,37 +10,38 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: .\core\settings.py:84
+#: .\core\settings.py:124
 msgid "O‘zbek"
 msgstr "Узбекский"
 
-#: .\core\settings.py:85
+#: .\core\settings.py:125
 msgid "English"
 msgstr "Английский"
 
-#: .\core\settings.py:86
+#: .\core\settings.py:126
 msgid "Русский"
 msgstr "Русский"
 
-#: .\main\models.py:6
+#: .\main\models.py:7
 msgid "Erkak"
 msgstr "Мужской"
 
-#: .\main\models.py:7
+#: .\main\models.py:8
 msgid "Ayol"
 msgstr "Женщина"
 
-#: .\main\models.py:13
+#: .\main\models.py:14
 msgid "Oliy ma'lumotli mutaxassis"
 msgstr "Специалист высшей категории"
 
-#: .\main\models.py:14
+#: .\main\models.py:15
 msgid "1-darajali mutaxassis"
 msgstr "Специалист 1-й категории"
 
-#: .\main\models.py:15
+#: .\main\models.py:16
 msgid "2-darajali mutaxassis"
 msgstr "Специалист 2-й категории"
 
@@ -58,8 +59,12 @@ msgstr "ИИ ЭКЗАМЕН"
 
 #: .\main\templates\main\ai_test.html:37
 #: .\main\templates\main\test_result.html:13
-msgid "Diqqat: Bu testlar sun'iy intellekt (AI) tomonidan yaratilgan bo'lib, xatolar bo'lishi mumkin."
-msgstr "Внимание: Эти тесты созданы искусственным интеллектом (ИИ) и могут содержать ошибки."
+msgid ""
+"Diqqat: Bu testlar sun'iy intellekt (AI) tomonidan yaratilgan bo'lib, "
+"xatolar bo'lishi mumkin."
+msgstr ""
+"Внимание: Эти тесты созданы искусственным интеллектом (ИИ) и могут содержать "
+"ошибки."
 
 #: .\main\templates\main\ai_test.html:64
 msgid "Variant"
@@ -69,15 +74,15 @@ msgstr "Вариант"
 msgid "Imtihonni yakunlash"
 msgstr "Завершить экзамен"
 
-#: .\main\templates\main\ai_test.html:130
+#: .\main\templates\main\ai_test.html:141
 msgid "Hech qanday savolga javob bermadingiz. Baribir yakunlaysizmi?"
 msgstr "Вы не ответили ни на один вопрос. Всё равно завершить?"
 
-#: .\main\templates\main\ai_test.html:131
+#: .\main\templates\main\ai_test.html:142
 msgid "Quyidagi savollarga javob bermadingiz"
 msgstr "Вы не ответили на следующие вопросы"
 
-#: .\main\templates\main\ai_test.html:131
+#: .\main\templates\main\ai_test.html:142
 msgid "Baribir imtihonni yakunlaysizmi?"
 msgstr "Всё равно завершить экзамен?"
 
@@ -92,7 +97,7 @@ msgstr "Симулятор на основе государственных ст
 #: .\main\templates\main\ai_test_select.html:18
 #: .\main\templates\main\ai_test_select.html:32
 #: .\main\templates\main\grade_students.html:10
-#: .\main\templates\main\search_results.html:47
+#: .\main\templates\main\search_results.html:56
 #: .\main\templates\main\student_detail.html:15
 msgid "Sinf"
 msgstr "Класс"
@@ -101,7 +106,7 @@ msgstr "Класс"
 msgid "Aniq fanlar yo'nalishi"
 msgstr "Направление точных наук"
 
-#: .\main\templates\main\ai_test_select.html:21 .\main\views.py:377
+#: .\main\templates\main\ai_test_select.html:21
 msgid "Matematika"
 msgstr "Математика"
 
@@ -110,17 +115,16 @@ msgstr "Математика"
 #: .\main\templates\main\ai_test_select.html:23
 #: .\main\templates\main\ai_test_select.html:35
 #: .\main\templates\main\ai_test_select.html:36
-#: .\main\templates\main\ai_test_select.html:37
+#: .\main\templates\main\apply.html:61
 msgid "savol"
 msgstr "вопрос"
 
-#: .\main\templates\main\ai_test_select.html:22 .\main\views.py:378
+#: .\main\templates\main\ai_test_select.html:22
 msgid "Tanqidiy fikrlash"
 msgstr "Критическое мышление"
 
 #: .\main\templates\main\ai_test_select.html:23
-#: .\main\templates\main\ai_test_select.html:37 .\main\views.py:379
-#: .\main\views.py:386
+#: .\main\templates\main\ai_test_select.html:36
 msgid "Ingliz tili"
 msgstr "Английский язык"
 
@@ -128,13 +132,9 @@ msgstr "Английский язык"
 msgid "Tabiiy fanlar yo'nalishi"
 msgstr "Направление естественных наук"
 
-#: .\main\templates\main\ai_test_select.html:35 .\main\views.py:384
-msgid "Biologiya"
-msgstr "Биология"
-
-#: .\main\templates\main\ai_test_select.html:36 .\main\views.py:385
-msgid "Geografiya"
-msgstr "География"
+#: .\main\templates\main\ai_test_select.html:35
+msgid "Science"
+msgstr ""
 
 # --- QABUL SAHIFASI (APPLY) ---
 #: .\main\templates\main\apply.html:9
@@ -142,106 +142,131 @@ msgid "Qabul Jarayoni"
 msgstr "Процесс приема"
 
 #: .\main\templates\main\apply.html:10 .\main\templates\main\base.html:15
-#: .\main\templates\main\base.html:297 .\main\templates\main\index.html:14
+#: .\main\templates\main\base.html:287 .\main\templates\main\index.html:14
 msgid "Oltiariq Ixtisoslashtirilgan Maktabi"
 msgstr "Специализированная школа Алтыарыка"
 
 #: .\main\templates\main\apply.html:16
-msgid "Ixtisoslashtirilgan maktablarga o'quvchilar qabuli iqtidorli bolalarni aniqlash, tanlash va ularni o'qitish bo'yicha Prezident, ijod va ixtisoslashtirilgan maktablar agentligi (PIIMA) tomonidan belgilangan tartibda amalga oshiriladi."
-msgstr "Приём учащихся в специализированные школы осуществляется в порядке, установленном Агентством Президентских, творческих и специализированных школ (PIIMA)."
+msgid ""
+"Ixtisoslashtirilgan maktablarga o'quvchilar qabuli iqtidorli bolalarni "
+"aniqlash, tanlash va ularni o'qitish bo'yicha Prezident, ijod va "
+"ixtisoslashtirilgan maktablar agentligi (PIIMA) tomonidan belgilangan "
+"tartibda amalga oshiriladi."
+msgstr ""
+"Приём учащихся в специализированные школы осуществляется в порядке, "
+"установленном Агентством Президентских, творческих и специализированных школ "
+"(PIIMA)."
 
-#: .\main\templates\main\apply.html:23
+#: .\main\templates\main\apply.html:24
 msgid "KERAKLI HUJJATLAR"
 msgstr "НЕОБХОДИМЫЕ ДОКУМЕНТЫ"
 
-#: .\main\templates\main\apply.html:26
+#: .\main\templates\main\apply.html:29
 msgid "Tug'ilganlik to'g'risidagi guvohnoma nusxasi"
 msgstr "Копия свидетельства о рождении"
 
-#: .\main\templates\main\apply.html:27
+#: .\main\templates\main\apply.html:33
 msgid "O'quvchining 3x4 o'lchamdagi rangli rasmi (oxirgi 2 oyda olingan)"
 msgstr "Цветное фото учащегося размером 3х4 (сделанное за последние 2 месяца)"
 
-#: .\main\templates\main\apply.html:28
+#: .\main\templates\main\apply.html:37
 msgid "Baholar tabelining nusxasi (direktor tomonidan tasdiqlangan)"
 msgstr "Копия табеля успеваемости (заверенная директором)"
 
-#: .\main\templates\main\apply.html:29
+#: .\main\templates\main\apply.html:41
 msgid "Ota-onasining pasport nusxasi va telefon raqami"
 msgstr "Копия паспорта родителя и номер телефона"
 
-#: .\main\templates\main\apply.html:35
+#: .\main\templates\main\apply.html:48
 msgid "IMTIHON FANLARI"
 msgstr "ЭКЗАМЕНАЦИОННЫЕ ПРЕДМЕТЫ"
 
-#: .\main\templates\main\apply.html:38
-msgid "Matematika (Mantiqiy misollar bilan)"
-msgstr "Математика (С логическими задачами)"
+#: .\main\templates\main\apply.html:66
+msgid "AI imtihonda sinash"
+msgstr "Попробовать ИИ-экзамен"
 
-#: .\main\templates\main\apply.html:39
-msgid "Tanqidiy fikrlash (Mantiqiy savollar)"
-msgstr "Критическое мышление (Логические вопросы)"
-
-#: .\main\templates\main\apply.html:40
-msgid "Ingliz tili (Grammatika va o'qib tushunish)"
-msgstr "Английский язык (Грамматика и чтение)"
-
-#: .\main\templates\main\apply.html:47
+#: .\main\templates\main\apply.html:75
 msgid "BOSQICHMA-BOSQICH YO'RIQNOMA"
 msgstr "ПОШАГОВАЯ ИНСТРУКЦИЯ"
 
-#: .\main\templates\main\apply.html:52
+#: .\main\templates\main\apply.html:80
 msgid "portalida ota-ona sifatida ro'yxatdan o'ting"
 msgstr "зарегистрируйтесь в качестве родителя на портале"
 
-#: .\main\templates\main\apply.html:56
-msgid "O'quvchi ma'lumotlarini kiriting va Oltiariq ixtisoslashtirilgan maktabini tanlang"
-msgstr "Введите данные учащегося и выберите специализированную школу Алтыарыка"
+#: .\main\templates\main\apply.html:84
+msgid ""
+"O'quvchi ma'lumotlarini kiriting va Ixtisoslashtirilgan maktablar bo'limidan "
+"Oltiariq ixtisoslashtirilgan maktabini tanlang"
+msgstr "Введите данные учащегося и выберите специализированную школу Алтыарыка в разделе специализированных школ"
 
-#: .\main\templates\main\apply.html:60
-msgid "Hujjatlarni yuklang va arizani yuboring (Sizga maxsus ID raqam beriladi)"
-msgstr "Загрузите документы и отправьте заявку (Вам будет присвоен уникальный ID-номер)"
+#: .\main\templates\main\apply.html:88
+msgid ""
+"Hujjatlarni yuklang va arizani yuboring (Sizga maxsus ID raqam beriladi)"
+msgstr ""
+"Загрузите документы и отправьте заявку (Вам будет присвоен уникальный ID-"
+"номер)"
 
-#: .\main\templates\main\apply.html:64
+#: .\main\templates\main\apply.html:92
 msgid "Imtihon ruxsatnomasini shaxsiy kabinetingizdan yuklab oling"
 msgstr "Скачайте разрешение на экзамен из своего личного кабинета"
 
-#: .\main\templates\main\apply.html:73
+#: .\main\templates\main\apply.html:101
 msgid "PIIMA orqali ariza topshirish"
 msgstr "Подача заявки через PIIMA"
 
 # --- NAVIGATSIYA VA UMUMIY ---
-#: .\main\templates\main\base.html:169 .\main\templates\main\base.html:273
+#: .\main\templates\main\base.html:184
 msgid "Bosh sahifa"
 msgstr "Главная"
 
-#: .\main\templates\main\base.html:172 .\main\templates\main\base.html:274
+#: .\main\templates\main\base.html:187 .\main\templates\main\base.html:322
 msgid "Bitiruvchilar"
 msgstr "Выпускники"
 
-#: .\main\templates\main\base.html:175 .\main\templates\main\base.html:275
+#: .\main\templates\main\base.html:190 .\main\templates\main\base.html:327
 msgid "Portfolio"
 msgstr "Портфолио"
 
-#: .\main\templates\main\base.html:178 .\main\templates\main\base.html:276
+#: .\main\templates\main\base.html:193
 msgid "Galereya"
 msgstr "Галерея"
 
-#: .\main\templates\main\base.html:181 .\main\templates\main\base.html:277
+#: .\main\templates\main\base.html:196 .\main\templates\main\base.html:360
 msgid "Aloqa"
 msgstr "Контакты"
 
-#: .\main\templates\main\base.html:190 .\main\templates\main\base.html:268
+#: .\main\templates\main\base.html:205 .\main\templates\main\base.html:349
+#: .\main\templates\main\search_results.html:16
 msgid "Qidiruv..."
 msgstr "Поиск..."
 
-#: .\main\templates\main\base.html:256 .\main\templates\main\base.html:282
+#: .\main\templates\main\base.html:267 .\main\templates\main\base.html:364
 msgid "Qabul"
 msgstr "Приём"
 
-#: .\main\templates\main\base.html:308
-msgid "Site Creator"
-msgstr "Создатель сайта"
+#: .\main\templates\main\base.html:298
+msgid "Sayt ishlab chiquvchisi"
+msgstr "Разработчик сайта"
+
+#: .\main\templates\main\base.html:312
+msgid "Asosiy"
+msgstr "Главная"
+
+#: .\main\templates\main\base.html:317 .\main\templates\main\index.html:29
+msgid "Yangiliklar"
+msgstr "Новости"
+
+#: .\main\templates\main\base.html:332 .\main\templates\main\base.html:343
+msgid "Ko'proq"
+msgstr "Ещё"
+
+#: .\main\templates\main\base.html:356 .\main\templates\main\index.html:34
+msgid "Ustozlar"
+msgstr "Учителя"
+
+#: .\main\templates\main\base.html:368
+msgid "Imtihon"
+msgstr "Экзамен"
 
 # --- ALOQA VA STATISTIKA ---
 #: .\main\templates\main\contact.html:11
@@ -273,26 +298,25 @@ msgid "Aniq joylashuvni ko'rish"
 msgstr "Посмотреть точное местоположение"
 
 #: .\main\templates\main\contact.html:60
-msgid "Veb-portal yaratuvchisi"
-msgstr "Создатель веб-портала"
+msgid "Veb-portal ishlab chiquvchisi"
+msgstr "Разработчик веб-портала"
 
 # --- GALEREYA VA ALBOMLLAR ---
-#: .\main\templates\main\gallery.html:6 .\main\templates\main\index.html:89
+#: .\main\templates\main\gallery.html:9 .\main\templates\main\index.html:88
 msgid "Maktab Galereyasi"
 msgstr "Школьная галерея"
 
-#: .\main\templates\main\gallery.html:17 .\main\templates\main\index.html:111
-msgid "rasm"
-msgstr "фото"
+#: .\main\templates\main\gallery.html:14 .\main\templates\main\index.html:98
+msgid "Oldingi rasm"
+msgstr ""
 
-#: .\main\templates\main\gallery_detail.html:21
-#: .\main\templates\main\student_detail.html:49
-msgid "Kattalashtirish"
-msgstr "Увеличить"
+#: .\main\templates\main\gallery.html:18 .\main\templates\main\index.html:102
+msgid "Keyingi rasm"
+msgstr ""
 
-#: .\main\templates\main\gallery_detail.html:30
-msgid "Galereyaga qaytish"
-msgstr "Вернуться в галерею"
+#: .\main\templates\main\gallery.html:48
+msgid "Hozircha rasmlar mavjud emas"
+msgstr ""
 
 #: .\main\templates\main\grade_students.html:17
 msgid "O'quvchilar"
@@ -312,7 +336,6 @@ msgstr "Алфавит"
 
 #: .\main\templates\main\grade_students.html:40
 #: .\main\templates\main\grade_students.html:58
-#: .\main\templates\main\student_detail.html:16
 msgid "Ball"
 msgstr "Балл"
 
@@ -344,13 +367,31 @@ msgstr "Подробнее"
 msgid "Maktabimiz bitiruvchilari"
 msgstr "Выпускники нашей школы"
 
-#: .\main\templates\main\graduates.html:26
+# --- YANGILIKLAR (QO'SHIMCHA) ---
+#: .\main\templates\main\graduates.html:15
+msgid "Barcha yillar"
+msgstr "Все годы"
+
+#: .\main\templates\main\graduates.html:37
+#: .\main\templates\main\student_detail.html:24
+msgid "Muddatidan avval talaba"
+msgstr "Выпускник досрочно"
+
+#: .\main\templates\main\graduates.html:45
+msgid "Hozirda"
+msgstr "Сейчас"
+
+#: .\main\templates\main\graduates.html:50
+msgid "Kirgan universiteti"
+msgstr "Университет"
+
+#: .\main\templates\main\graduates.html:58
 msgid "Hozircha bitiruvchilar ma'lumotlari yuklanmagan."
 msgstr "Данные выпускников пока не загружены"
 
 #: .\main\templates\main\index.html:11
-msgid "Abdurahmon Maxsutaliyev tomonidan yaratilgan portal"
-msgstr "Портал, созданный Абдурахмоном Махсуталиевым"
+msgid "Abdurahmon Maxsutaliyev tomonidan ishlab chiqilgan portal"
+msgstr "Портал, разработанный Абдурахмоном Махсуталиевым"
 
 #: .\main\templates\main\index.html:17
 msgid "Bilim bilan marralar sari — Kelajak liderlari bizda ulg‘ayadi!"
@@ -360,87 +401,104 @@ msgstr "К вершинам со знаниями — Будущие лидер�
 msgid "AI Imtihon"
 msgstr "ИИ ЭКЗАМЕН"
 
-#: .\main\templates\main\index.html:29
-msgid "Yangiliklar"
-msgstr "Новости"
-
-#: .\main\templates\main\index.html:34
-msgid "Ustozlar"
-msgstr "Учителя"
-
 #: .\main\templates\main\index.html:39
 msgid "Qabul-2026"
 msgstr "Приём-2026"
 
-#: .\main\templates\main\index.html:91
+#: .\main\templates\main\index.html:90
 msgid "Maktabimiz hayotidan foto-lavhalar"
 msgstr "Фото-мгновения из жизни нашей школы"
 
-#: .\main\templates\main\index.html:94
+#: .\main\templates\main\index.html:96
 msgid "Barcha rasmlar"
 msgstr "Все фотографии"
 
-#: .\main\templates\main\index.html:124
+#: .\main\templates\main\index.html:179
 msgid "So'nggi Yangiliklar"
 msgstr "Последние новости"
 
-#: .\main\templates\main\index.html:126
+#: .\main\templates\main\index.html:181
 msgid "Maktabimiz hayotidagi eng muhim voqealar"
 msgstr "Самые важные события в жизни нашей школы"
 
 # --- YANGILIKLAR (QO'SHIMCHA) ---
-#: .\main\templates\main\index.html:129
+#: .\main\templates\main\index.html:184
 msgid "Barcha yangiliklar"
 msgstr "Все новости"
 
-#: .\main\templates\main\index.html:146 .\main\templates\main\news_all.html:39
+#: .\main\templates\main\index.html:201 .\main\templates\main\news_all.html:45
 msgid "Batafsil o'qish"
 msgstr "Читать далее"
 
-#: .\main\templates\main\index.html:158
+#: .\main\templates\main\index.html:213
 msgid "Bizning Malakali Ustozlarimiz"
 msgstr "Наши учители"
 
 # --- AI IMTIHON SIMULYATORI ---
-#: .\main\templates\main\index.html:180
+#: .\main\templates\main\index.html:235
 msgid "Imtihonga tayyormisiz?"
 msgstr "Готовы к экзамену?"
 
-#: .\main\templates\main\index.html:182
-msgid "Bizning sun'iy intellekt tizimimiz PIIMA standartlari asosida har safar yangi testlar tuzib beradi. O'zingizni sinab ko'ring!"
-msgstr "Наша система искусственного интеллекта создает новые тесты на основе стандартов PIIMA. Проверьте себя и мгновенно узнайте результат!"
+#: .\main\templates\main\index.html:237
+msgid ""
+"Bizning sun'iy intellekt tizimimiz PIIMA standartlari asosida har safar "
+"yangi testlar tuzib beradi. O'zingizni sinab ko'ring!"
+msgstr ""
+"Наша система искусственного интеллекта создает новые тесты на основе "
+"стандартов PIIMA. Проверьте себя и мгновенно узнайте результат!"
 
-#: .\main\templates\main\index.html:185
+#: .\main\templates\main\index.html:240
 msgid "Testni boshlash"
 msgstr "Начать тест"
 
-#: .\main\templates\main\index.html:194
+#: .\main\templates\main\index.html:249
 msgid "Siz ham bizning safimizga qo'shiling!"
 msgstr "Присоединяйтесь к нам!"
 
-#: .\main\templates\main\index.html:197
-msgid "Oltiariq Ixtisoslashtirilgan maktabida 2026-yilgi o'quv yili uchun qabul davom etmoqda."
-msgstr "В специализированной школе Алтыарыка продолжается приём на 2026 учебный год. Постройте свое будущее вместе с нами."
+#: .\main\templates\main\index.html:252
+msgid ""
+"Oltiariq Ixtisoslashtirilgan maktabida 2026-yilgi o'quv yili uchun qabul "
+"davom etmoqda."
+msgstr ""
+"В специализированной школе Алтыарыка продолжается приём на 2026 учебный год. "
+"Постройте свое будущее вместе с нами."
 
-#: .\main\templates\main\index.html:200
+#: .\main\templates\main\index.html:255
 msgid "Hujjat Topshirish"
 msgstr "Подача документов"
 
-#: .\main\templates\main\news_all.html:11
+#: .\main\templates\main\news_all.html:10
 msgid "Barcha Yangiliklar"
 msgstr "Все новости"
 
-#: .\main\templates\main\news_all.html:15
+#: .\main\templates\main\news_all.html:13
 msgid "Maktabimizning barcha rasmiy xabarlari"
 msgstr "Все официальные новости нашей школы"
 
+#: .\main\templates\main\news_all.html:35
+#: .\main\templates\main\news_detail.html:35
+msgid "Yoqdi"
+msgstr "Нравится"
+
 # --- NAVIGATSIYA VA UMUMIY ---
-#: .\main\templates\main\news_all.html:51
-#: .\main\templates\main\news_detail.html:52
-#: .\main\templates\main\search_results.html:89
-#: .\main\templates\main\test_result.html:88
+#: .\main\templates\main\news_all.html:57
+#: .\main\templates\main\news_detail.html:105
+#: .\main\templates\main\search_results.html:98
+#: .\main\templates\main\test_result.html:94
 msgid "Bosh sahifaga qaytish"
 msgstr "Главная"
+
+#: .\main\templates\main\news_detail.html:12
+msgid "YANGILIK"
+msgstr "НОВОСТЬ"
+
+#: .\main\templates\main\news_detail.html:80
+msgid "O'xshash maqolalar"
+msgstr "Похожие статьи"
+
+#: .\main\templates\main\news_detail.html:83
+msgid "Barchasi"
+msgstr "Все"
 
 #: .\main\templates\main\portfolio.html:4
 msgid "SINFLAR PORTFOLIOSI"
@@ -450,39 +508,47 @@ msgstr "ПОРТФОЛИО КЛАССОВ"
 msgid "Qidiruv natijalari"
 msgstr "Результаты поиска"
 
-#: .\main\templates\main\search_results.html:21
+#: .\main\templates\main\search_results.html:18
+msgid "Qidiruv"
+msgstr "Поиск"
+
+#: .\main\templates\main\search_results.html:30
 msgid "Topilgan Ustozlar"
 msgstr "Найденные учителя"
 
-#: .\main\templates\main\search_results.html:39
+#: .\main\templates\main\search_results.html:48
 msgid "Topilgan O'quvchilar"
 msgstr "Найденные ученики"
 
-#: .\main\templates\main\search_results.html:59
+#: .\main\templates\main\search_results.html:68
 msgid "Topilgan Yangiliklar"
 msgstr "Найденные новости"
 
-#: .\main\templates\main\search_results.html:81
+#: .\main\templates\main\search_results.html:90
 msgid "Hech narsa topilmadi"
 msgstr "Ничего не найдено."
 
-#: .\main\templates\main\search_results.html:82
+#: .\main\templates\main\search_results.html:91
 msgid "Iltimos, boshqa so'z bilan qidirib ko'ring."
 msgstr "Пожалуйста, попробуйте поискать другие слова."
 
-#: .\main\templates\main\student_detail.html:17
-msgid "ID Karta"
-msgstr "Скачать ID-карту"
+#: .\main\templates\main\student_detail.html:35
+msgid "ball"
+msgstr ""
 
-#: .\main\templates\main\student_detail.html:30
+#: .\main\templates\main\student_detail.html:39
 msgid "O'quvchi haqida"
 msgstr "Об ученике"
 
-#: .\main\templates\main\student_detail.html:40
+#: .\main\templates\main\student_detail.html:49
 msgid "Erishilgan yutuqlar"
 msgstr "Достижения"
 
 #: .\main\templates\main\student_detail.html:58
+msgid "Kattalashtirish"
+msgstr "Увеличить"
+
+#: .\main\templates\main\student_detail.html:67
 msgid "Sertifikatlar yo'q"
 msgstr "Сертификаты еще не загружены."
 
@@ -495,27 +561,27 @@ msgid "Ma'lumotlar yuklanmoqda..."
 msgstr "Данные загружаются..."
 
 # --- PORTFOLIO VA SINFLAR (G'RAMMATIK TO'G'RI) ---
-#: .\main\templates\main\teacher_detail.html:25
+#: .\main\templates\main\teacher_detail.html:26
 msgid "Fani o'qituvchisi"
 msgstr "Учитель предмета"
 
-#: .\main\templates\main\teacher_detail.html:28
-msgid "ID Kartani Yuklash"
-msgstr "Скачать ID-карту"
-
-#: .\main\templates\main\teacher_detail.html:44
+#: .\main\templates\main\teacher_detail.html:46
 msgid "Tarjimai hol va ma'lumot"
 msgstr "Биография и информация"
 
-#: .\main\templates\main\teacher_detail.html:53
+#: .\main\templates\main\teacher_detail.html:54
 msgid "Bog'lanish uchun"
 msgstr "Для связи"
 
-#: .\main\templates\main\teacher_detail.html:63
+#: .\main\templates\main\teacher_detail.html:66
 msgid "Ilmiy va pedagogik yutuqlar"
 msgstr "Научные и педагогические достижения"
 
-#: .\main\templates\main\teacher_detail.html:83
+#: .\main\templates\main\teacher_detail.html:86
+msgid "Hozircha sertifikatlar mavjud emas"
+msgstr "Сертификатов пока нет."
+
+#: .\main\templates\main\teacher_detail.html:96
 msgid "Ortga qaytish"
 msgstr "Назад"
 
@@ -547,41 +613,69 @@ msgstr "Скачать"
 msgid "Xatolar ustida ishlash"
 msgstr "Работа над ошибками"
 
-#: .\main\templates\main\test_result.html:60
+#: .\main\templates\main\test_result.html:62
 msgid "To'g'ri"
 msgstr "Правильно"
 
-#: .\main\templates\main\test_result.html:62
+#: .\main\templates\main\test_result.html:67
 msgid "Xato"
 msgstr "Ошибка"
 
-#: .\main\templates\main\test_result.html:68
+#: .\main\templates\main\test_result.html:74
 msgid "Sizning javobingiz"
 msgstr "Ваш ответ"
 
-#: .\main\templates\main\test_result.html:72
+#: .\main\templates\main\test_result.html:78
 msgid "To'g'ri javob"
 msgstr "Правильный ответ"
 
-#: .\main\templates\main\test_result.html:79
+#: .\main\templates\main\test_result.html:85
 msgid "Yechish usuli"
 msgstr "Способ решения"
 
-#: .\main\views.py:375
-msgid "5-sinf Aniq fanlar"
-msgstr "Точные науки, 5-й класс"
-
-#: .\main\views.py:382
-msgid "7-sinf Tabiiy fanlar"
-msgstr "Естественные науки, 7-й класс"
-
-#: .\main\views.py:405
+#: .\main\views.py:354
 msgid "Javob berilmagan"
 msgstr "Ответ не дан"
 
-#: .\main\views.py:408
+#: .\main\views.py:357
 msgid "Tushuntirish mavjud emas"
 msgstr "Объяснение отсутствует"
+
+#~ msgid "Biologiya"
+#~ msgstr "Биология"
+
+#~ msgid "Geografiya"
+#~ msgstr "География"
+
+#~ msgid "Matematika (Mantiqiy misollar bilan)"
+#~ msgstr "Математика (С логическими задачами)"
+
+#~ msgid "Tanqidiy fikrlash (Mantiqiy savollar)"
+#~ msgstr "Критическое мышление (Логические вопросы)"
+
+#~ msgid "Ingliz tili (Grammatika va o'qib tushunish)"
+#~ msgstr "Английский язык (Грамматика и чтение)"
+
+#~ msgid "Site Creator"
+#~ msgstr "Создатель сайта"
+
+#~ msgid "rasm"
+#~ msgstr "фото"
+
+#~ msgid "Galereyaga qaytish"
+#~ msgstr "Вернуться в галерею"
+
+#~ msgid "ID Karta"
+#~ msgstr "Скачать ID-карту"
+
+#~ msgid "ID Kartani Yuklash"
+#~ msgstr "Скачать ID-карту"
+
+#~ msgid "5-sinf Aniq fanlar"
+#~ msgstr "Точные науки, 5-й класс"
+
+#~ msgid "7-sinf Tabiiy fanlar"
+#~ msgstr "Естественные науки, 7-й класс"
 
 #~ msgid "o'quv yili"
 #~ msgstr "учебный год"
@@ -607,9 +701,6 @@ msgstr "Объяснение отсутствует"
 #~ msgid "O'quvchining shaxsiy galereyasi"
 #~ msgstr "Личная галерея студента"
 
-#~ msgid "Hozircha sertifikatlar yuklanmagan"
-#~ msgstr "Сертификаты еще не загружены."
-
 #~ msgid "Imtihon blokini tanlang"
 #~ msgstr "Выберите блок экзамена"
 
@@ -630,9 +721,6 @@ msgstr "Объяснение отсутствует"
 
 #~ msgid "Hech qanday yutug'i yo'q"
 #~ msgstr "Достижений пока нет"
-
-#~ msgid "Sayt yaratuvchisi"
-#~ msgstr "Создатель сайта"
 
 #~ msgid "Statistika kiritilmagan"
 #~ msgstr "Статистика не введена"
@@ -664,42 +752,8 @@ msgstr "Объяснение отсутствует"
 #~ msgid "Portal created by Abdurahmon Maxsutaliyev"
 #~ msgstr "Портал, созданный Абдурахмоном Махсуталиевым"
 
-#: .\main\templates\main\news_detail.html
-msgid "YANGILIK"
-msgstr "НОВОСТЬ"
+#~ msgid "Yutuqlar"
+#~ msgstr "Достижения"
 
-#: .\main\templates\main\news_detail.html
-msgid "Yoqdi"
-msgstr "Нравится"
-
-#: .\main\templates\main\news_detail.html
-msgid "O'xshash maqolalar"
-msgstr "Похожие статьи"
-
-#: .\main\templates\main\news_detail.html
-msgid "Barchasi"
-msgstr "Все"
-
-#: .\main\templates\main\base.html
-msgid "Asosiy"
-msgstr "Главная"
-
-#: .\main\templates\main\base.html
-msgid "Yutuqlar"
-msgstr "Достижения"
-
-#: .\main\templates\main\base.html
-msgid "Jadval"
-msgstr "Расписание"
-
-#: .\main\templates\main\base.html
-msgid "Ko'proq"
-msgstr "Ещё"
-
-#: .\main\templates\main\base.html
-msgid "Qidiruv"
-msgstr "Поиск"
-
-#: .\main\templates\main\base.html
-msgid "Imtihon"
-msgstr "Экзамен"
+#~ msgid "Jadval"
+#~ msgstr "Расписание"

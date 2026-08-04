@@ -172,9 +172,12 @@ def student_detail(request, pk):
     student = get_object_or_404(Student, pk=pk)
     # Achievements_list - bu Achievement modelidagi related_name
     achievements = student.achievements_list.all()
+    # 5 va undan ortiq milliy sertifikat -> muddatidan avval talaba
+    is_early_graduate = achievements.filter(is_national=True).count() >= 5
     return render(request, 'main/student_detail.html', {
         'student': student,
-        'achievements': achievements
+        'achievements': achievements,
+        'is_early_graduate': is_early_graduate,
     })
 
 # 8. YANGILIKLAR TAFSILOTI
@@ -211,8 +214,18 @@ def news_detail(request, pk):
 
 # 10. BITIRUVCHILAR RO'YXATI
 def graduates_list(request):
-    graduates = Graduate.objects.all().order_by('-year')
-    return render(request, 'main/graduates.html', {'graduates': graduates})
+    years = (Graduate.objects.exclude(academic_year='')
+             .values_list('academic_year', flat=True)
+             .distinct().order_by('-academic_year'))
+    selected_year = request.GET.get('year', '')
+    graduates = Graduate.objects.all().order_by('-academic_year')
+    if selected_year:
+        graduates = graduates.filter(academic_year=selected_year)
+    return render(request, 'main/graduates.html', {
+        'graduates': graduates,
+        'years': years,
+        'selected_year': selected_year,
+    })
 
 # 11. ALOQA VA QABUL
 def contact(request): return render(request, 'main/contact.html')

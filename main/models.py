@@ -73,6 +73,7 @@ class Achievement(models.Model):
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to='certificates/')
     description = models.TextField()
+    is_national = models.BooleanField(default=False, verbose_name="Milliy sertifikat")
 
 # Yangiliklar
 class News(models.Model):
@@ -95,9 +96,14 @@ class NewsImage(models.Model):
 # Bitiruvchilar
 class Graduate(models.Model):
     full_name = models.CharField(max_length=100)
-    year = models.IntegerField()
-    image = models.ImageField(upload_to='graduates/')
-    achievement = models.CharField(max_length=255)
+    academic_year = models.CharField(max_length=20, default='2025-2026', verbose_name="O'quv yili")
+    image = models.ImageField(upload_to='graduates/', verbose_name="Rasm")
+    achievement = models.CharField(max_length=255, verbose_name="Hozirda (faoliyati)")
+    university = models.CharField(max_length=255, blank=True, verbose_name="Kirgan universiteti")
+    is_early_graduate = models.BooleanField(default=False, verbose_name="Muddatidan avval bitirgan")
+
+    def __str__(self):
+        return self.full_name
 
 # models.py ichida SchoolStat modelini toping va mana shunday o'zgartiring:
 class SchoolStat(models.Model):

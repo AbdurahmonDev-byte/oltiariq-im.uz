@@ -1,24 +1,56 @@
 {% extends 'main/base.html' %}
 {% load i18n %} 
 {% block content %}
-<div class="py-10 px-4 sm:px-6">
+<div class="py-10 px-4 sm:px-6 max-w-7xl mx-auto">
     <h2 class="text-3xl font-black text-blue-900 dark:text-yellow-400 mb-10 text-center uppercase italic tracking-tighter">
         {% trans "Maktabimiz bitiruvchilari" %}
     </h2>
+
+    <!-- O'QUV YILLARI FILTRI -->
+    {% if years %}
+    <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-14">
+        <a href="{% url 'graduates' %}"
+           class="px-4 md:px-6 py-2 rounded-full font-black uppercase text-[10px] md:text-xs transition-all shadow-md whitespace-nowrap
+                  {% if not selected_year %}bg-blue-900 text-white dark:bg-yellow-400 dark:text-blue-950 scale-105{% else %}bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-100 dark:hover:bg-slate-700{% endif %}">
+            {% trans "Barcha yillar" %}
+        </a>
+        {% for y in years %}
+        <a href="{% url 'graduates' %}?year={{ y|urlencode }}"
+           class="px-4 md:px-6 py-2 rounded-full font-black uppercase text-[10px] md:text-xs transition-all shadow-md whitespace-nowrap
+                  {% if selected_year == y %}bg-blue-900 text-white dark:bg-yellow-400 dark:text-blue-950 scale-105{% else %}bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-100 dark:hover:bg-slate-700{% endif %}">
+            {{ y }}
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for graduate in graduates %}
         <div class="glass overflow-hidden shadow-lg group hover:shadow-2xl transition duration-500 animate__animated animate__fadeInUp">
             <div class="h-64 relative overflow-hidden">
                 <img src="{{ graduate.image.url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                 <div class="absolute top-4 right-4 bg-yellow-400 text-blue-900 px-3 py-1 rounded-full font-black text-[10px]">
-                    {{ graduate.year }}-YIL
+                    {{ graduate.academic_year }}
                 </div>
+                {% if graduate.is_early_graduate %}
+                <div class="absolute top-4 left-4 bg-emerald-500 text-white px-3 py-1 rounded-full font-black text-[10px] flex items-center gap-1">
+                    <i class="fas fa-rocket text-xs"></i> {% trans "Muddatidan avval talaba" %}
+                </div>
+                {% endif %}
             </div>
             <div class="p-6">
                 <h3 class="text-xl font-black text-gray-800 leading-none mb-2">{{ graduate.full_name }}</h3>
-                <div class="border-l-4 border-blue-900 pl-3 mt-4">
-                    <p class="text-xs text-blue-800 font-black uppercase tracking-widest mb-1 italic">Hozirda:</p>
-                    <p class="text-sm text-gray-600 font-semibold">{{ graduate.achievement }}</p>
+                <div class="border-l-4 border-blue-900 pl-3 mt-4 space-y-2">
+                    <div>
+                        <p class="text-xs text-blue-800 font-black uppercase tracking-widest mb-1 italic">{% trans "Hozirda" %}:</p>
+                        <p class="text-sm text-gray-600 font-semibold">{{ graduate.achievement }}</p>
+                    </div>
+                    {% if graduate.university %}
+                    <div>
+                        <p class="text-xs text-blue-800 font-black uppercase tracking-widest mb-1 italic">{% trans "Kirgan universiteti" %}:</p>
+                        <p class="text-sm text-gray-600 font-semibold flex items-center gap-1"><i class="fas fa-graduation-cap text-blue-900"></i> {{ graduate.university }}</p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

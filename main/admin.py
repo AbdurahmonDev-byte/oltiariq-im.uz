@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import News, NewsImage, Teacher, TeacherAchievement, Grade, Student, Achievement, SchoolStat
+from .models import News, NewsImage, Teacher, TeacherAchievement, Grade, Student, Achievement, SchoolStat, Graduate
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
@@ -40,7 +40,15 @@ class AchievementInline(admin.TabularInline):
 class AchievementAdmin(admin.ModelAdmin):
     # MANA SHU QATOR DROPDOWN-NI QIDIRUVGA AYLANTIRADI
     autocomplete_fields = ['student'] 
-    list_display = ('student', 'title')
+    list_display = ('student', 'title', 'is_national')
+    list_filter = ('is_national',)
+
+# Bitiruvchilar
+@admin.register(Graduate)
+class GraduateAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'academic_year', 'university', 'is_early_graduate')
+    list_filter = ('academic_year',)
+    search_fields = ('full_name', 'university', 'achievement')
 
 # 4. QOLGANLARI (Bularни dekoratori yo'q, shuning uchun pastda yozamiz)
 admin.site.register(Grade)
