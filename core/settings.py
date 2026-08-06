@@ -104,6 +104,15 @@ DATABASES = {
     }
 }
 
+# Kesh (tezlik uchun) — in-memory, qisqa muddat
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'oltiariq-im',
+        'TIMEOUT': 300,
+    }
+}
+
 # Parol tekshiruvi
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},

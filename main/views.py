@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import Q, F
 from django.http import HttpResponse
 from django.utils.translation import get_language, gettext as _
+from django.core.cache import cache
 from .models import News, Teacher, Grade, Student, Graduate, SchoolStat, GalleryImage, ExamSession
 # PDF yaratish uchun kutubxonalar
 from reportlab.pdfgen import canvas
@@ -43,11 +44,33 @@ AI_EXAMS_BY_KEY = {e['key']: e for e in AI_EXAM_STRUCTURE}
 # 1. BOSH SAHIFA
 def home(request):
     """Barcha asosiy ma'lumotlarni bosh sahifaga chiqarish"""
-    news = News.objects.all().order_by('-created_at')[:3]
-    teachers = Teacher.objects.all()
-    director = Teacher.objects.filter(position__icontains='direktor').first()
-    stats = SchoolStat.objects.all()
-    gallery_images = GalleryImage.objects.all().order_by('-created_at')[:10]
+    cache_timeout = 300  # 5 daqiqa
+
+    news = cache.get('home_news')
+    if news is None:
+        news = list(News.objects.all().order_by('-created_at')[:3])
+        cache.set('home_news', news, cache_timeout)
+
+    teachers = cache.get('home_teachers')
+    if teachers is None:
+        teachers = list(Teacher.objects.all())
+        cache.set('home_teachers', teachers, cache_timeout)
+
+    director = cache.get('home_director')
+    if director is None:
+        director = Teacher.objects.filter(position__icontains='direktor').first()
+        cache.set('home_director', director, cache_timeout)
+
+    stats = cache.get('home_stats')
+    if stats is None:
+        stats = list(SchoolStat.objects.all())
+        cache.set('home_stats', stats, cache_timeout)
+
+    gallery_images = cache.get('home_gallery')
+    if gallery_images is None:
+        gallery_images = list(GalleryImage.objects.all().order_by('-created_at')[:10])
+        cache.set('home_gallery', gallery_images, cache_timeout)
+
     return render(request, 'main/index.html', {
         'news': news, 
         'teachers': teachers, 
