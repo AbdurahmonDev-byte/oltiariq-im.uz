@@ -297,27 +297,27 @@
         <div class="grid grid-cols-5 max-w-lg mx-auto">
             <a href="{% url 'home' %}" class="relative flex flex-col items-center gap-1 py-2.5 {% if request.resolver_match.url_name == 'home' %}text-blue-900 dark:text-yellow-400{% else %}text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors{% endif %}">
                 <i class="fas fa-home text-xl"></i>
-                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Asosiy" %}</span>
+                <span class="text-[7px] sm:text-[9px] font-black uppercase tracking-normal sm:tracking-widest max-w-full px-0.5 whitespace-nowrap overflow-hidden text-ellipsis">{% trans "Asosiy" %}</span>
                 {% if request.resolver_match.url_name == 'home' %}<span class="absolute -top-px w-8 h-0.5 bg-blue-900 dark:bg-yellow-400 rounded-full"></span>{% endif %}
             </a>
             <a href="{% url 'news_all' %}" class="relative flex flex-col items-center gap-1 py-2.5 {% if 'news' in request.path %}text-blue-900 dark:text-yellow-400{% else %}text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors{% endif %}">
                 <i class="fas fa-newspaper text-xl"></i>
-                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Yangiliklar" %}</span>
+                <span class="text-[7px] sm:text-[9px] font-black uppercase tracking-normal sm:tracking-widest max-w-full px-0.5 whitespace-nowrap overflow-hidden text-ellipsis">{% trans "Yangiliklar" %}</span>
                 {% if 'news' in request.path %}<span class="absolute -top-px w-8 h-0.5 bg-blue-900 dark:bg-yellow-400 rounded-full"></span>{% endif %}
             </a>
             <a href="{% url 'graduates' %}" class="relative flex flex-col items-center gap-1 py-2.5 {% if request.resolver_match.url_name == 'graduates' %}text-blue-900 dark:text-yellow-400{% else %}text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors{% endif %}">
                 <i class="fas fa-graduation-cap text-xl"></i>
-                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Bitiruvchilar" %}</span>
+                <span class="text-[7px] sm:text-[9px] font-black uppercase tracking-normal sm:tracking-widest max-w-full px-0.5 whitespace-nowrap overflow-hidden text-ellipsis">{% trans "Bitiruvchilar" %}</span>
                 {% if request.resolver_match.url_name == 'graduates' %}<span class="absolute -top-px w-8 h-0.5 bg-blue-900 dark:bg-yellow-400 rounded-full"></span>{% endif %}
             </a>
             <a href="{% url 'portfolio' %}" class="relative flex flex-col items-center gap-1 py-2.5 {% if 'portfolio' in request.path %}text-blue-900 dark:text-yellow-400{% else %}text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors{% endif %}">
                 <i class="fas fa-folder-open text-xl"></i>
-                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Portfolio" %}</span>
+                <span class="text-[7px] sm:text-[9px] font-black uppercase tracking-normal sm:tracking-widest max-w-full px-0.5 whitespace-nowrap overflow-hidden text-ellipsis">{% trans "Portfolio" %}</span>
                 {% if 'portfolio' in request.path %}<span class="absolute -top-px w-8 h-0.5 bg-blue-900 dark:bg-yellow-400 rounded-full"></span>{% endif %}
             </a>
             <button type="button" onclick="toggleMoreMenu()" class="relative flex flex-col items-center gap-1 py-2.5 text-slate-400 dark:text-slate-500 hover:text-blue-900 dark:hover:text-yellow-400 transition-colors">
                 <i class="fas fa-ellipsis text-xl"></i>
-                <span class="text-[9px] font-black uppercase tracking-widest">{% trans "Ko'proq" %}</span>
+                <span class="text-[7px] sm:text-[9px] font-black uppercase tracking-normal sm:tracking-widest max-w-full px-0.5 whitespace-nowrap overflow-hidden text-ellipsis">{% trans "Ko'proq" %}</span>
             </button>
         </div>
     </nav>
