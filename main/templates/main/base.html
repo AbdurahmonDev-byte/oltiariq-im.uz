@@ -164,6 +164,11 @@
 </head>
 <body class="bg-slate-50 dark:bg-[#080c1a] text-slate-900 dark:text-slate-100 overflow-x-hidden">
 
+    <!-- GEOMETRIK LATTICE FON ANIMATSIYASI (barcha sahifalarda, kontent orqasida) -->
+    <div id="lattice-bg" class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+        <canvas id="lattice-canvas" class="w-full h-full block"></canvas>
+    </div>
+
     <!-- HEADER (SIZGA MOSLAB TARTIBLANGAN) -->
     <header class="fixed top-0 left-0 right-0 z-50 p-4 md:p-6">
         <div class="max-w-[1550px] mx-auto premium-glass-header shadow-2xl px-3 py-3 sm:px-6 sm:py-4 flex justify-between items-center rounded-[20px] sm:rounded-[30px] flex-wrap gap-3 md:flex-nowrap">
@@ -383,5 +388,6 @@
             });
         });
     </script>
+    <script src="{% static 'main/js/lattice.js' %}"></script>
 </body>
 </html>
