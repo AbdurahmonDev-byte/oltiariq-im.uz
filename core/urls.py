@@ -8,6 +8,9 @@ from django.contrib.sitemaps.views import sitemap
 # SITEMAP IMPORTLARI
 from main.sitemaps import StaticViewSitemap, NewsSitemap, StudentSitemap, TeacherSitemap
 
+# ADMIN: BARCHA MA'LUMOTLARNI O'CHIRISH TUGMASI
+from main.admin_views import clear_all_data
+
 sitemaps = {
     'static': StaticViewSitemap,
     'news': NewsSitemap,
@@ -16,6 +19,7 @@ sitemaps = {
 }
 
 urlpatterns = [
+    path('admin/clear-data/', clear_all_data, name='admin_clear_data'),
     path('admin/', admin.site.urls),
     path('rosetta/', include('rosetta.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
