@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import News, NewsImage, Teacher, TeacherAchievement, Grade, Student, Achievement, SchoolStat, Graduate
+from .models import News, NewsImage, Teacher, TeacherAchievement, Grade, Student, Achievement, SchoolStat, Graduate, GraduateAdmission
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
@@ -44,11 +44,17 @@ class AchievementAdmin(admin.ModelAdmin):
     list_filter = ('is_national',)
 
 # Bitiruvchilar
+class GraduateAdmissionInline(admin.TabularInline):
+    model = GraduateAdmission
+    extra = 1
+    fields = ('university', 'is_studying')
+
 @admin.register(Graduate)
 class GraduateAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'academic_year', 'university', 'is_early_graduate')
+    list_display = ('full_name', 'academic_year', 'current_university', 'is_early_graduate')
     list_filter = ('academic_year',)
-    search_fields = ('full_name', 'university', 'achievement')
+    search_fields = ('full_name', 'achievement', 'admissions__university')
+    inlines = [GraduateAdmissionInline]
 
 # 4. QOLGANLARI (Bularни dekoratori yo'q, shuning uchun pastda yozamiz)
 admin.site.register(Grade)

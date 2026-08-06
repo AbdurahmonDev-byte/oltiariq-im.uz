@@ -2,7 +2,7 @@
 
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
-from .models import News, Student, Teacher
+from .models import News, Student, Teacher, Graduate
 
 class StaticViewSitemap(Sitemap):
     priority = 1.0
@@ -32,3 +32,9 @@ class TeacherSitemap(Sitemap):
     def items(self): 
         # Tartiblash qo'shildi: Ismi bo'yicha
         return Teacher.objects.all().order_by('full_name')
+
+class GraduateSitemap(Sitemap):
+    changefreq = "monthly"
+    priority = 0.7
+    def items(self):
+        return Graduate.objects.all().order_by('full_name')

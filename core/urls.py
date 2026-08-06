@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 
 # SITEMAP IMPORTLARI
-from main.sitemaps import StaticViewSitemap, NewsSitemap, StudentSitemap, TeacherSitemap
+from main.sitemaps import StaticViewSitemap, NewsSitemap, StudentSitemap, TeacherSitemap, GraduateSitemap
 
 # ADMIN: BARCHA MA'LUMOTLARNI O'CHIRISH TUGMASI
 from main.admin_views import clear_all_data
@@ -16,6 +16,7 @@ sitemaps = {
     'news': NewsSitemap,
     'students': StudentSitemap,
     'teachers': TeacherSitemap,
+    'graduates': GraduateSitemap,
 }
 
 urlpatterns = [

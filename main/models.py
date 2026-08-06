@@ -99,11 +99,40 @@ class Graduate(models.Model):
     academic_year = models.CharField(max_length=20, default='2025-2026', verbose_name="O'quv yili")
     image = models.ImageField(upload_to='graduates/', verbose_name="Rasm")
     achievement = models.CharField(max_length=255, verbose_name="Hozirda (faoliyati)")
-    university = models.CharField(max_length=255, blank=True, verbose_name="Kirgan universiteti")
     is_early_graduate = models.BooleanField(default=False, verbose_name="Muddatidan avval bitirgan")
 
     def __str__(self):
         return self.full_name
+
+    def get_absolute_url(self):
+        return reverse('graduate_detail', args=[self.pk])
+
+    @property
+    def current_university(self):
+        """Bitiruvchi aynan hozir qayerda o'qiydi (is_studying=True).
+        Agar belgilanmagan bo'lsa, birinchi qabul universitetini qaytaradi."""
+        adm = self.admissions.filter(is_studying=True).first()
+        if adm:
+            return adm.university
+        adm = self.admissions.first()
+        return adm.university if adm else ''
+
+    @property
+    def universities_list(self):
+        """Bitiruvchi qabul qilingan barcha universitetlar."""
+        return self.admissions.all()
+
+
+# Bitiruvchi qabul qilingan universitetlar.
+# Bitiruvchi bir nechta universitetga qabul qilinishi mumkin,
+# lekin faqat bittasida o'qiydi (is_studying=True).
+class GraduateAdmission(models.Model):
+    graduate = models.ForeignKey(Graduate, on_delete=models.CASCADE, related_name='admissions')
+    university = models.CharField(max_length=255, verbose_name="Universitet nomi")
+    is_studying = models.BooleanField(default=False, verbose_name="Aynan shu yerda o'qiydi")
+
+    def __str__(self):
+        return f"{self.graduate.full_name} - {self.university}"
 
 # models.py ichida SchoolStat modelini toping va mana shunday o'zgartiring:
 class SchoolStat(models.Model):

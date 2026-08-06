@@ -254,6 +254,15 @@ def graduates_list(request):
 def contact(request): return render(request, 'main/contact.html')
 def apply_info(request):
     return render(request, 'main/apply.html', {'exams': AI_EXAM_STRUCTURE})
+
+# BITIRUVCHI PROFILI
+def graduate_detail(request, pk):
+    graduate = get_object_or_404(Graduate, pk=pk)
+    admissions = graduate.admissions.all()
+    return render(request, 'main/graduate_detail.html', {
+        'graduate': graduate,
+        'admissions': admissions,
+    })
 # main/views.py ga qo'shing:
 
 def news_all(request):
