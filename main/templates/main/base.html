@@ -145,21 +145,6 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 20px; }
         .dark ::-webkit-scrollbar-thumb { background: #fbbf24; }
-
-        /* Background Paths — oqayotgan SVG chiziqlar animatsiyasi */
-        .bg-path-line {
-            transform-box: fill-box;
-            transform-origin: center;
-            animation-name: bgPathFloat;
-            animation-timing-function: ease-in-out;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
-        }
-
-        @keyframes bgPathFloat {
-            from { transform: translateY(0); }
-            to { transform: translateY(var(--float-amp, -12px)); }
-        }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-[#080c1a] text-slate-900 dark:text-slate-100 overflow-x-hidden">
@@ -276,8 +261,6 @@
 
     <!-- MAIN CONTENT -->
     <main class="relative container mx-auto mt-20 sm:mt-32 lg:mt-40 px-3 sm:px-4 min-h-screen page-reveal-effect">
-        <!-- BARCHA SAHIFALAR TEPASIDAGI FON (rasm + animatsion chiziqlar) -->
-        {% include 'main/partials/background_paths.html' %}
         <div class="relative z-10">
             {% block content %}{% endblock %}
         </div>

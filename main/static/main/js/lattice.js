@@ -81,7 +81,6 @@
         ctx.fillRect(0, 0, W, H);
 
         var strokeRGB = dark ? '148, 163, 184' : '71, 85, 105';
-        var accentRGB = dark ? '251, 191, 36' : '30, 58, 138';
 
         var pCount = points.length;
         var i, j, k;
@@ -151,20 +150,10 @@
 
                             var avgX = (p1.x + p2.x + p3.x) * 0.3333;
                             var avgY = (p1.y + p2.y + p3.y) * 0.3333;
-                            var mDx = mouse.x - avgX, mDy = mouse.y - avgY;
-                            var mouseDistSq = mDx * mDx + mDy * mDy;
-                            var near = mouseDistSq < 48400;
-                            var fillAlpha = near
-                                ? (1 - Math.sqrt(mouseDistSq) / 220) * (dark ? 0.20 : 0.12)
-                                : 0.03;
 
-                            ctx.fillStyle = near
-                                ? 'rgba(' + accentRGB + ',' + fillAlpha.toFixed(2) + ')'
-                                : 'rgba(' + strokeRGB + ',' + fillAlpha.toFixed(2) + ')';
-                            ctx.strokeStyle = near
-                                ? 'rgba(' + accentRGB + ',' + (fillAlpha * 1.5).toFixed(2) + ')'
-                                : 'rgba(' + strokeRGB + ', 0.07)';
-                            ctx.lineWidth = near ? 0.8 : 0.4;
+                            ctx.fillStyle = 'rgba(' + strokeRGB + ', 0.04)';
+                            ctx.strokeStyle = 'rgba(' + strokeRGB + ', 0.07)';
+                            ctx.lineWidth = 0.4;
 
                             ctx.beginPath();
                             ctx.moveTo(p1.x, p1.y);
@@ -181,20 +170,11 @@
 
         for (i = 0; i < pCount; i++) {
             var pt = points[i];
-            var mdx = mouse.x - pt.x, mdy = mouse.y - pt.y;
-            var isNear = mdx * mdx + mdy * mdy < 48400;
             var pulseRadius = 1.8 + Math.sin(pt.pulse) * 1.0;
-            ctx.fillStyle = isNear ? 'rgba(' + accentRGB + ', 0.9)' : 'rgba(' + strokeRGB + ', 0.35)';
+            ctx.fillStyle = 'rgba(' + strokeRGB + ', 0.4)';
             ctx.beginPath();
-            ctx.arc(pt.x, pt.y, isNear ? 3.5 : pulseRadius, 0, Math.PI * 2);
+            ctx.arc(pt.x, pt.y, pulseRadius, 0, Math.PI * 2);
             ctx.fill();
-            if (isNear) {
-                ctx.strokeStyle = 'rgba(' + accentRGB + ', 0.35)';
-                ctx.lineWidth = 0.8;
-                ctx.beginPath();
-                ctx.arc(pt.x, pt.y, 7 + Math.sin(pt.pulse * 2) * 2.5, 0, Math.PI * 2);
-                ctx.stroke();
-            }
         }
 
         requestAnimationFrame(render);
