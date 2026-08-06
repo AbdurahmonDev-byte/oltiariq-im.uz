@@ -25,6 +25,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-oltiariq-im-2026-supe
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
+# Saytning asosiy (kanonik) manzili — SEO/OG/sitemap uchun
+SITE_URL = os.environ.get('SITE_URL', 'https://oltiariq-im.uz')
+
 # Barcha sahifalar tepasidagi fon rasmi (media/site-bg.jpg kabi).
 # Bo'sh bo'lsa faqat animatsion chiziqlar (Background Paths) ko'rinadi.
 SITE_BG_IMAGE = os.environ.get('SITE_BG_IMAGE', '')

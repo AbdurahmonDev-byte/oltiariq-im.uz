@@ -26,6 +26,7 @@ msgid "Русский"
 msgstr "Русский"
 
 #: .\main\admin_views.py:50
+msgid "Barcha ma'lumotlar muvaffaqiyatli o'chirildi."
 msgstr "Все данные успешно удалены."
 
 #: .\main\models.py:7
@@ -62,6 +63,7 @@ msgstr "ИИ ЭКЗАМЕН"
 
 #: .\main\templates\main\ai_test.html:37
 #: .\main\templates\main\test_result.html:13
+msgid "Diqqat: Bu testlar sun'iy intellekt (AI) tomonidan yaratilgan bo'lib, xatolar bo'lishi mumkin."
 msgstr "Внимание: Эти тесты созданы искусственным интеллектом (ИИ) и могут содержать ошибки."
 
 #: .\main\templates\main\ai_test.html:64
@@ -131,6 +133,7 @@ msgid "Tabiiy fanlar yo'nalishi"
 msgstr "Направление естественных наук"
 
 #: .\main\templates\main\ai_test_select.html:35
+msgid "Science"
 msgstr "Science"
 
 # --- QABUL SAHIFASI (APPLY) ---
@@ -143,7 +146,13 @@ msgstr "Процесс приема"
 msgid "Oltiariq Ixtisoslashtirilgan Maktabi"
 msgstr "Специализированная школа Алтыарыка"
 
+#: .\main\templates\main\base.html:21 .\main\templates\main\base.html:29
+#: .\main\templates\main\base.html:38
+msgid "Oltiariq Ixtisoslashtirilgan maktabi — bitiruvchilar, ustozlar, yangiliklar va qabul haqida rasmiy portal."
+msgstr "Официальный портал специализированной школы Алтыарыка — выпускники, учителя, новости и приём."
+
 #: .\main\templates\main\apply.html:16
+msgid "Ixtisoslashtirilgan maktablarga o'quvchilar qabuli iqtidorli bolalarni aniqlash, tanlash va ularni o'qitish bo'yicha Prezident, ijod va ixtisoslashtirilgan maktablar agentligi (PIIMA) tomonidan belgilangan tartibda amalga oshiriladi."
 msgstr "Приём учащихся в специализированные школы осуществляется в порядке, установленном Агентством президентских, творческих и специализированных школ (PIIMA), для выявления, отбора и обучения одарённых детей."
 
 #: .\main\templates\main\apply.html:24
@@ -183,9 +192,11 @@ msgid "portalida ota-ona sifatida ro'yxatdan o'ting"
 msgstr "зарегистрируйтесь в качестве родителя на портале"
 
 #: .\main\templates\main\apply.html:84
+msgid "O'quvchi ma'lumotlarini kiriting va Ixtisoslashtirilgan maktablar bo'limidan Oltiariq ixtisoslashtirilgan maktabini tanlang"
 msgstr "Введите данные учащегося и выберите Олтиарикскую специализированную школу в разделе специализированных школ"
 
 #: .\main\templates\main\apply.html:88
+msgid "Hujjatlarni yuklang va arizani yuboring (Sizga maxsus ID raqam beriladi)"
 msgstr "Загрузите документы и отправьте заявку (вам будет выдан специальный ID номер)"
 
 #: .\main\templates\main\apply.html:92
@@ -289,12 +300,15 @@ msgid "Maktab Galereyasi"
 msgstr "Школьная галерея"
 
 #: .\main\templates\main\gallery.html:14 .\main\templates\main\index.html:98
+msgid "Oldingi rasm"
 msgstr "Предыдущее изображение"
 
 #: .\main\templates\main\gallery.html:18 .\main\templates\main\index.html:102
+msgid "Keyingi rasm"
 msgstr "Следующее изображение"
 
 #: .\main\templates\main\gallery.html:48
+msgid "Hozircha rasmlar mavjud emas"
 msgstr "Изображений пока нет"
 
 #: .\main\templates\main\grade_students.html:17
@@ -354,18 +368,23 @@ msgid "Hozirda"
 msgstr "Сейчас"
 
 #: .\main\templates\main\graduate_detail.html:40
+msgid "Qabul qilingan universitetlar"
 msgstr "Университеты, куда зачислен"
 
 #: .\main\templates\main\graduate_detail.html:49
+msgid "Aynan shu yerda o'qiydi"
 msgstr "Учится именно здесь"
 
 #: .\main\templates\main\graduate_detail.html:58
+msgid "Hozir shu yerda ta'lim oladi"
 msgstr "Сейчас учится здесь"
 
 #: .\main\templates\main\graduate_detail.html:65
+msgid "Universitetlar ma'lumoti yuklanmagan"
 msgstr "Информация об университетах ещё не загружена"
 
 #: .\main\templates\main\graduate_detail.html:73
+msgid "Barcha bitiruvchilar"
 msgstr "Все выпускники"
 
 #: .\main\templates\main\graduates.html:6
@@ -378,6 +397,7 @@ msgid "Barcha yillar"
 msgstr "Все годы"
 
 #: .\main\templates\main\graduates.html:50
+msgid "O'qiyotgan universiteti"
 msgstr "Университет, где учится"
 
 #: .\main\templates\main\graduates.html:58
@@ -435,6 +455,7 @@ msgid "Imtihonga tayyormisiz?"
 msgstr "Готовы к экзамену?"
 
 #: .\main\templates\main\index.html:237
+msgid "Bizning sun'iy intellekt tizimimiz PIIMA standartlari asosida har safar yangi testlar tuzib beradi. O'zingizni sinab ko'ring!"
 msgstr "Наша система искусственного интеллекта на основе стандартов PIIMA каждый раз составляет новые тесты. Проверьте себя!"
 
 #: .\main\templates\main\index.html:240
@@ -446,6 +467,7 @@ msgid "Siz ham bizning safimizga qo'shiling!"
 msgstr "Присоединяйтесь к нам!"
 
 #: .\main\templates\main\index.html:252
+msgid "Oltiariq Ixtisoslashtirilgan maktabida 2026-yilgi o'quv yili uchun qabul davom etmoqda."
 msgstr "В Олтиарикской специализированной школе продолжается приём на 2026 учебный год."
 
 #: .\main\templates\main\index.html:255
@@ -518,6 +540,7 @@ msgid "Iltimos, boshqa so'z bilan qidirib ko'ring."
 msgstr "Пожалуйста, попробуйте поискать другие слова."
 
 #: .\main\templates\main\student_detail.html:35
+msgid "ball"
 msgstr "баллов"
 
 #: .\main\templates\main\student_detail.html:39
@@ -626,24 +649,31 @@ msgid "Tushuntirish mavjud emas"
 msgstr "Объяснение отсутствует"
 
 #: .\templates\admin\clear_data.html:7 .\templates\admin\index.html:10
+msgid "Barcha ma'lumotlarni o'chirish"
 msgstr "Удалить все данные"
 
 #: .\templates\admin\clear_data.html:9
+msgid "DIQQAT! Bu amalni qaytarib bo'lmaydi. Quyidagi ma'lumotlar butunlay o'chiriladi (fayllari bilan):"
 msgstr "ВНИМАНИЕ! Это действие необратимо. Следующие данные будут полностью удалены (вместе с файлами):"
 
 #: .\templates\admin\clear_data.html:20
+msgid "Jami"
 msgstr "Итого"
 
 #: .\templates\admin\clear_data.html:26
+msgid "Eslatma: Admin hisoblari (login ma'lumotlari) o'chirilmaydi."
 msgstr "Примечание: Учётные записи администраторов (логины) не будут удалены."
 
 #: .\templates\admin\clear_data.html:30
+msgid "Haqiqatan ham BARCHA ma'lumotlarni o'chirmoqchimisiz?"
 msgstr "Вы действительно хотите удалить ВСЕ данные?"
 
 #: .\templates\admin\clear_data.html:32
+msgid "Ha, BARCHA ma'lumotlarni o'chirish"
 msgstr "Да, удалить ВСЕ данные"
 
 #: .\templates\admin\clear_data.html:35
+msgid "Bekor qilish"
 msgstr "Отмена"
 
 #~ msgid "Biologiya"

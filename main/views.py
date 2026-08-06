@@ -483,3 +483,16 @@ def generate_certificate(request):
         p.showPage()
         p.save()
         return response
+
+
+def robots_txt(request):
+    """Google va boshqa qidiruv botlari uchun robots.txt."""
+    content = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /admin/\n"
+        "Disallow: /uz/admin/\n"
+        "Disallow: /static/\n\n"
+        "Sitemap: {site_url}/sitemap.xml\n".format(site_url=getattr(settings, 'SITE_URL', 'https://oltiariq-im.uz').rstrip('/'))
+    )
+    return HttpResponse(content, content_type='text/plain; charset=utf-8')
