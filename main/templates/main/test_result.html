@@ -23,9 +23,11 @@
     <h3 class="text-lg sm:text-xl md:text-2xl font-black text-blue-900 dark:text-yellow-400 mb-6 uppercase break-words">
         {% trans "Sertifikatni yuklab olish" %}
     </h3>
+    {% if percent >= 75 %}
     <form action="{% url 'generate_certificate' %}" method="POST" class="flex flex-col md:flex-row gap-3 sm:gap-4 justify-center">
         {% csrf_token %}
         <input type="hidden" name="score" value="{{ score }}">
+        <input type="hidden" name="total" value="{{ total }}">
         <input type="hidden" name="subject" value="{{ subject }}">
         <input type="text" name="full_name" placeholder="{% trans 'Ism va familiyangizni kiriting' %}" 
                class="px-4 sm:px-8 py-4 rounded-2xl bg-white dark:bg-slate-800 border-2 border-blue-900/10 outline-none focus:border-blue-600 transition-all font-bold w-full md:w-96" required>
@@ -33,6 +35,21 @@
             <i class="fas fa-file-pdf mr-2"></i> {% trans "Yuklab olish" %}
         </button>
     </form>
+    {% else %}
+    <div class="text-center py-4 md:py-8">
+        <div class="text-5xl md:text-7xl mb-4 md:mb-6">😔🎓</div>
+        <p class="text-base sm:text-lg md:text-2xl font-black text-slate-800 dark:text-white leading-relaxed break-words mb-3">
+            {% trans "Sertifikat uchun yetarli ball to'play olmadingiz" %} 😕
+        </p>
+        <p class="text-xs sm:text-sm md:text-base font-bold text-slate-500 dark:text-slate-300 leading-relaxed">
+            🎯 {% trans "Sertifikat olish uchun kamida 75% natija to'plashingiz kerak" %} 🔥<br>
+            💪 {% trans "Xatolar ustida ishlang va qayta urinib ko'ring" %} 🚀
+        </p>
+        <div class="mt-5 md:mt-7 flex items-center justify-center gap-3 text-2xl md:text-4xl">
+            <span>📚</span><span>✨</span><span>🏆</span><span>✨</span><span>📚</span>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
         <!-- PROGRESS BAR TUZATILDI -->

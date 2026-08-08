@@ -439,10 +439,35 @@ def ai_test_select(request):
     return render(request, 'main/ai_test_select.html')
 def generate_certificate(request):
     if request.method == "POST":
-        full_name = request.POST.get('full_name').upper()
-        score = request.POST.get('score')
-        subject = request.POST.get('subject')
+        full_name = request.POST.get('full_name', '').strip().upper()
+        score = int(request.POST.get('score', 0) or 0)
+        total = int(request.POST.get('total', 0) or 0)
+        subject = request.POST.get('subject', '')
         lang = get_language()
+
+        # Sertifikat FAQAT 75% va undan yuqori natija uchun beriladi
+        percent = (score / total) * 100 if total > 0 else 0
+        if percent < 75 or not full_name:
+            messages = {
+                'uz': "😔 Sertifikat uchun yetarli ball to'play olmadingiz. 75% va undan yuqori natija qo'lga kiritgan taqdirdagina sertifikat beriladi. 🎯 Omad! 💪",
+                'ru': "😔 Вы не набрали достаточно баллов для сертификата. Сертификат выдаётся только при результате 75% и выше. 🎯 Удачи! 💪",
+                'en': "😔 You didn't score enough points for the certificate. Certificates are awarded only for a score of 75% or higher. 🎯 Good luck! 💪",
+            }
+            return HttpResponse(f"""
+                <html><head><meta charset="utf-8"><title>Certifikat</title>
+                <style>
+                    body{{font-family:Arial,sans-serif;background:linear-gradient(135deg,#fef3c7,#dbeafe);min-height:100vh;display:flex;align-items:center;justify-content:center;margin:0;padding:20px}}
+                    .box{{background:#fff;border-radius:30px;padding:50px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.15);max-width:560px;border:4px solid #fbbf24}}
+                    .emoji{{font-size:70px}}h1{{color:#1e3a8a;font-size:26px}}p{{color:#475569;font-size:17px;line-height:1.6}}
+                    a{{display:inline-block;margin-top:20px;background:#1e3a8a;color:#fff;padding:14px 30px;border-radius:15px;text-decoration:none;font-weight:bold}}
+                </style></head><body>
+                <div class="box">
+                    <div class="emoji">😔🎓</div>
+                    <h1>{messages.get(lang, messages['uz'])}</h1>
+                    <p>📊 Sizning natijangiz: <b>{percent:.0f}%</b> 🎯</p>
+                    <a href="/">🏠 Bosh sahifaga qaytish</a>
+                </div></body></html>
+            """)
 
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="certificate_{full_name}.pdf"'
